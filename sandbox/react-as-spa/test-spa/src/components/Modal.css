@@ -1,0 +1,47 @@
+.modal-backdrop {
+    background: var(--overlay);
+    display: flex;
+        align-items: center;
+        justify-content: center;
+    position: fixed;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+}
+
+.modal {
+    background: var(--white);
+    border-radius: 0.5rem;
+    width: 20rem;
+    max-width: 90vw;
+    overflow: hidden;
+    position: relative;
+}
+
+.modal-header {
+    background: var(--dark);
+    color: var(--white);
+    padding: var(--space);
+}
+
+.modal-header h4 {
+    margin: 0;
+    padding: 0;
+}
+
+.modal-content {
+    padding: var(--space);
+}
+
+.modal-close {
+    margin: 0;
+    position: absolute;
+        top: 0;
+        right: 0;
+}
+
+.modal-close:hover {
+    filter: none;
+    opacity: 0.5;
+}

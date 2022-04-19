@@ -1,0 +1,55 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <title>React Test Components</title>
+    <style>
+        body {
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        }
+
+        .banner-inner button {
+            margin-left: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <h1>React Test Components</h1>
+    <div id="banner" style="background: slategray; color: ghostwhite; padding: 1rem"; >
+    </div>
+    <footer>
+        <p>footer</p>
+    </footer>
+    <script type="text/babel">
+        const Banner = () => {
+            const title = "Banner Title Text"
+            const subtitle = "Banner Subtitle Text"
+            const URL = "https://www.test.com"
+            const handleClick = (e) => {
+                e.target.innerHTML = `Random # ${Math.random().toFixed(2) * 100}`
+            }
+
+            return (
+                <div className="banner-inner">
+                    <h2>{title.toUpperCase()}</h2>
+                    <h3>{subtitle}</h3>
+                    <p>Todays date: {new Date().toDateString()}</p>
+                    <p>Random number: {Math.random().toFixed(2) * 100}</p>
+                    <p>
+                        <a href={URL}>Link</a>
+                        <button onClick={handleClick}>Random #</button>
+                        <button onClick={(e)=> console.log('click handled inline ', e)}>Inline Click Handling</button>
+                    </p>
+                    <div id="buttonTarget"></div>
+                </div>
+            )
+        }
+
+        ReactDOM.render(<Banner/>, document.getElementById('banner'))
+    </script>
+</body>
+</html>

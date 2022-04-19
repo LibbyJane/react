@@ -1,0 +1,13 @@
+.events-list {
+    list-style: none;
+}
+
+.events-list li {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.events-list button {
+    margin-block: 0;
+}
