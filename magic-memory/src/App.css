@@ -37,24 +37,3 @@ button:hover {
     grid-template-columns: repeat(4, 1fr);
     gap: 1rem;
 }
-
-.card-grid li {
-  border-radius: var(--radius);
-  margin: 0;
-  padding: 0;
-  position: relative;
-  overflow: hidden;
-
-  display: grid;
-    grid-template-columns: 1;
-    grid-template-rows: 1;
-    grid-template-areas: 'card-img'
-}
-
-.card-front {
-  grid-area: card-img
-}
-
-.card-back {
-  grid-area: card-img
-}
