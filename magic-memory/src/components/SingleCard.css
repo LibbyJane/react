@@ -1,0 +1,52 @@
+.card {
+    --duration: 250ms;
+
+    display: grid;
+        grid-template-areas: 'card-img';
+
+    /* border: 2px solid var(--white); */
+    border-radius: var(--radius);
+    cursor: pointer;
+    margin: 0;
+    overflow: hidden;
+    padding: 0;
+    position: relative;
+    transition: all var(--duration) ease-in-out;
+    transition-delay: 500ms;
+}
+
+.card.is-matched {
+    filter: grayscale(0.95) brightness(2);
+    opacity: 0.6;
+}
+
+.card img {
+    grid-area: card-img;
+    -webkit-user-drag: none;
+    transition: all var(--duration) ease-in-out;
+}
+
+
+.card.is-matched .card-back {
+    pointer-events: none;
+}
+
+.card-front {
+   transform: rotateY(90deg);
+}
+
+
+.card.is-flipped .card-front{
+    transform: rotateY(0deg);
+    transition-delay: var(--duration);
+}
+
+.card-back {
+    transform: rotateY(0deg);
+    transition-delay: var(--duration);
+}
+
+.card.is-flipped .card-back{
+    transform: rotateY(90deg);
+    transition-delay: 0;
+ }
