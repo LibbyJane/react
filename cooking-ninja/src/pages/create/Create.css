@@ -1,0 +1,40 @@
+.create {
+    max-width: 480px;
+    margin: var(--space-large) auto;
+  }
+  .create label {
+    display: block;
+  }
+
+  .create textarea {
+    height: 10rem;
+  }
+
+  .create ul {
+    display: flex;
+        flex-wrap: wrap;
+    list-style: none;
+  }
+
+  .create li {
+      flex: 0 0 auto;
+      font-style: italic;
+      padding-right: var(--space-sm)
+  }
+
+  .create button {
+    display: block;
+    width: 100px;
+    font-size: 1em;
+    color: var(--white);
+    padding: 8px var(--space);
+    border: 0;
+    border-radius: var(--radius);
+    background-color: var(--red);
+    cursor: pointer;
+    text-decoration: none;
+  }
+
+  .col ~ button {
+    margin-left: var(--space)
+  }

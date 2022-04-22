@@ -1,0 +1,54 @@
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@100;200;300;400;500;600;700;800&display=swap');
+
+/* base styles */
+html, body, #root {
+  height: 100%;
+}
+body {
+  font-family: Raleway, sans-serif;
+  margin: 0;
+  font-size: 16px;
+  background: var(--grey-df);
+  color: var(--grey-3);
+}
+h1,h2,h3, h4, h5, h6, p, address, ul, li, label, input, textarea, button {
+  margin: 0 0 var(--space);
+  padding: 0
+}
+
+label {
+  font-weight: bold;
+  margin-bottom: var(--space-sm);
+}
+
+input, textarea {
+  color: var(--grey-3);
+  padding: var(--space-sm);
+  font-size: 1rem;
+  border-radius: var(--radius);
+  border: var(--border-width) solid var(--grey-d4);
+  background-color: var(--white);
+  display: block;
+  margin-bottom: var(--space);
+  width: 100%;
+}
+
+.page-title {
+  text-align: center;
+  margin: var(--space-large) auto;
+  color: var(--grey-3);
+}
+.loading, .error {
+  text-align: center;
+  margin: var(--space-large) auto;
+}
+
+.cols {
+  display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.col {
+  flex: 1;
+}

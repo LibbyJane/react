@@ -1,0 +1,27 @@
+.App {
+  min-height: 100%;
+}
+
+body {
+  --brown: #56423D;
+  --brown-light: #BA8474;
+  --red: #CE1B00;
+  --white: #fff;
+  --grey-e: ##e2e2e2;
+  --grey-df: #dfdfdf;
+  --grey-d4: #d4d4d4;
+  --grey-9: #999;
+  --grey-7: #777;
+  --grey-5: #555;
+  --grey-3: #333;
+  --space: 1.25rem; /* 20px -> 1.25rem */
+  --space-sm: .5rem; /* 8px -> .5rem */
+  --space-large: 2.5rem; /* 40px -> 2.5rem */
+  --radius: .25rem; /* 4px -> .25rem */
+  --border-width: 1px;
+  --shadow: 3px 3px 3px rgba(0, 0, 0, 0.05);
+}
+
+* {
+  box-sizing: border-box;
+}
