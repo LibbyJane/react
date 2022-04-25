@@ -9,7 +9,6 @@ From the `data` directory, run:
 Json server will serve up the database at https://localhost:3001
 
 
-
 In the main project directory, you can run:
 
 ### `npm start`

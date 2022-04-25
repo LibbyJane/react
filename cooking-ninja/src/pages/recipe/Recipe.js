@@ -1,6 +1,7 @@
 import { useEffect } from "react"
 import { useHistory, useParams } from "react-router-dom"
 import { useFetch } from '../../hooks/useFetch'
+import LoadingIcon from '../../components/Loading.js'
 
 import './Recipe.css'
 
@@ -8,23 +9,6 @@ export default function Recipe() {
   const { id } = useParams()
   const history = useHistory()
   const {error, isPending, data:recipe } = useFetch('https://localhost:3001/recipes/' + id) // json server isn't working
-  // const resp = useFetch('./../data/db.json')
-  // let recipe = null
-  // let isPending = resp.isPending
-  // let error = resp.error
-  // const history = useHistory()
-
-  // if (resp.data) {
-  //   // fudging some of this because json server isn't working
-  //   console.log('resp', resp)
-  //   let recipes = resp.data.recipes
-  //   recipe = recipes.filter(r => r.id === id)[0];
-  //   console.log('recipe', recipe)
-
-  //   if (!recipe) {
-  //       resp.error = 404;
-  //   }
-  // }
 
   useEffect(() => {
     if (error) {
@@ -38,9 +22,9 @@ export default function Recipe() {
 
   return (
     <section className="recipe">
-      {isPending && <p>Loading&hellip</p>}
+      {isPending && <LoadingIcon />}
       {error && <p>{error}</p>}
-      {recipe && (
+      {recipe && !isPending && (
         <>
           <h1 className="page-title">{recipe.title}</h1>
           <p>Takes {recipe.cookingTime} to cook.</p>

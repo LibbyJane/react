@@ -1,56 +1,30 @@
 .recipe-list {
     display: grid;
         grid-template-columns: repeat(3, 1fr);
-        grid-gap: var(--space-large);
+        grid-gap: var(--space-lg);
     list-style: none;
     max-width: 1200px;
-    margin: var(--space-large) auto;
+    margin: var(--space-lg) auto;
     padding: 0;
-  }
-  .recipe-list .card {
-    background: #fff;
-    border-radius: var(--radius);
-    box-shadow:  var(--shadow);
-    color: var(--grey-3);
-    margin: 0;
-    padding: var(--space);
-    transition: all 0.3s ease;
-    position: relative;
-  }
-  .recipe-list .card:hover {
-    transform: rotate(3deg);
   }
 
   .recipe-list a {
-      color: currentColor;
-      text-decoration: none;
+    color: var(--text);
+    text-decoration: none;
   }
   .recipe-list h3 {
-    color: var(--grey-5);
+    color: var(--heading);
     margin-bottom: var(--space-sm);
   }
   .recipe-list h4 {
-    color: var(--grey-9);
-    font-size: 0.9em;
+    color: var(--heading);
     font-weight: normal;
   }
   .recipe-list p {
-    color: var(--grey-5);
-    font-size: 0.7em;
+    font-size: 0.9rem;
     margin: var(--space) 0;
     line-height: 1.5em;
   }
-
-  .recipe-list button {
-    color: var(--grey-5);
-    text-decoration: none;
-    display: block;
-    background: var(--grey-e);
-    font-size: 0.9em;
-    /* width: 100px; */
-    text-align: center;
-    width: 1var(--space);
-    padding: var(--space-sm);
-    border-radius: var(--radius);
-    margin: var(--space) auto 0;
+  .recipe-list .card:hover {
+    transform: scale(1.05);
   }

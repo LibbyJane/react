@@ -19,6 +19,7 @@ export default function Searchbar() {
         <label htmlFor="search">Search:</label>
         <input
           id="search"
+          placeholder="e.g. pizza"
           type="text"
           onChange={(e) => setTerm(e.target.value)}
           required

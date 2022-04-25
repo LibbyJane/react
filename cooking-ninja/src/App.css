@@ -1,27 +1,64 @@
+* {
+  box-sizing: border-box;
+}
+
 .App {
   min-height: 100%;
 }
 
-body {
-  --brown: #56423D;
-  --brown-light: #BA8474;
+main {
+  --green: #B3B018;
+  --green-dark: #808700;
   --red: #CE1B00;
+  --red-dark: #AB0000;
+  --blue: #51A6BD;
+  --blue-dark: #007288;
   --white: #fff;
-  --grey-e: ##e2e2e2;
+  --grey-e: #eee;
   --grey-df: #dfdfdf;
   --grey-d4: #d4d4d4;
+  --grey-b: #bbb;
   --grey-9: #999;
   --grey-7: #777;
   --grey-5: #555;
   --grey-3: #333;
+  --grey-1: #111;
   --space: 1.25rem; /* 20px -> 1.25rem */
   --space-sm: .5rem; /* 8px -> .5rem */
-  --space-large: 2.5rem; /* 40px -> 2.5rem */
+  --space-lg: 2.5rem; /* 40px -> 2.5rem */
   --radius: .25rem; /* 4px -> .25rem */
-  --border-width: 1px;
+  --border-width: 2px;
   --shadow: 3px 3px 3px rgba(0, 0, 0, 0.05);
+
+  --theme: var(--red);
+  --theme-alt: var(--red-dark);
+  --bg-outer:  var(--grey-df);
+  --bg: var(--white);
+  --text: var(--grey-3);
+  --text-alt: var(--grey-1);
+  --heading: var(--theme-alt);
 }
 
-* {
-  box-sizing: border-box;
+.mode-dark {
+  --red: var(--red-dark);
+  --blue: var(--blue-dark);
+  --green: var(--green-dark);
+  --bg-outer: var(--grey-3);
+  --bg: var(--grey-5);
+  --text: var(--grey-d4);
+  --text-alt: var(--white);
+  --heading: var(--grey-e);
+  --shadow: 3px 3px 3px rgba(0, 0, 0, 0.5);
+
 }
+
+.theme-blue {
+  --theme: var(--blue);
+  --theme-alt: var(--blue-dark);
+}
+
+.theme-green {
+  --theme: var(--green);
+  --theme-alt: var(--green-dark);
+}
+

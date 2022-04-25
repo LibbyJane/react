@@ -1,6 +1,7 @@
 import { useFetch } from '../../hooks/useFetch'
 import { useLocation } from 'react-router-dom'  // gives us the query string
 import RecipeList from '../../components/RecipeList'
+import LoadingIcon from '../../components/Loading.js'
 
 import './Search.css'
 
@@ -15,8 +16,8 @@ export default function Search() {
     <section>
       <h1 className="page-title">Recipes including "{query}"</h1>
       {error && <p className="error">{error}</p>}
-      {isPending && <p className="loading">Loading…</p>}
-      {data && <RecipeList recipes={data} />}
+      {isPending && <LoadingIcon />}
+      {!isPending && data && <RecipeList recipes={data} />}
     </section>
   )
 }

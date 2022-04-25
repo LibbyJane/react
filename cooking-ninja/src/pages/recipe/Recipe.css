@@ -1,10 +1,8 @@
 .recipe {
-    background: var(--white);
+    background: var(--bg);
     max-width: 1200px;
-    margin: var(--space-large) auto;
-
-
-    padding: var(--space-large);
+    margin: var(--space-lg) auto;
+    padding: var(--space-lg);
 
   }
   /* .recipe ul {
@@ -17,7 +15,7 @@
   .recipe li {
     list-style-type: none;
     margin-right: 10px;
-    color: var(--grey-7);
+    color: var(--text);
   }
   .recipe li::after {
     content: ",";

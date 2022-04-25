@@ -9,11 +9,21 @@ body {
   margin: 0;
   font-size: 16px;
   background: var(--grey-df);
-  color: var(--grey-3);
+  color: var(--text);
 }
+
+main {
+  background: var(--bg-outer);
+  color: var(--text);
+}
+
 h1,h2,h3, h4, h5, h6, p, address, ul, li, label, input, textarea, button {
   margin: 0 0 var(--space);
   padding: 0
+}
+
+h1,h2,h3, h4, h5, h6 {
+  color: var(--heading);
 }
 
 label {
@@ -22,25 +32,35 @@ label {
 }
 
 input, textarea {
-  color: var(--grey-3);
-  padding: var(--space-sm);
-  font-size: 1rem;
+  background-color: var(--bg-outer);
   border-radius: var(--radius);
-  border: var(--border-width) solid var(--grey-d4);
-  background-color: var(--white);
+  border: var(--border-width) solid var(--bg);
+
   display: block;
+  font-family: Raleway, sans-serif;
+  font-size: 1rem;
   margin-bottom: var(--space);
+  padding: var(--space-sm);
   width: 100%;
 }
 
+.mode-dark input {
+  background-color: var(--text);
+  color: var(--bg-outer);
+}
+
+.mode-dark textarea {
+  background-color: var(--text);
+  color: var(--bg-outer);
+}
+
 .page-title {
+  margin: var(--space-lg) auto;
   text-align: center;
-  margin: var(--space-large) auto;
-  color: var(--grey-3);
 }
 .loading, .error {
+  margin: var(--space-lg) auto;
   text-align: center;
-  margin: var(--space-large) auto;
 }
 
 .cols {
@@ -52,3 +72,63 @@ input, textarea {
 .col {
   flex: 1;
 }
+
+.btn {
+  background: var(--bg-outer);
+  color: var(--theme-alt);
+  border-radius: var(--radius);
+  border: 0;
+  cursor: pointer;
+  display: block;
+  font-weight: bold;
+  font-size: 0.95rem;
+  /* width: 100px; */
+  margin: var(--space) auto 0;
+  padding: var(--space-sm);
+
+  text-align: center;
+  text-decoration: none;
+}
+
+.mode-dark .btn {
+  background: var(--grey-b);
+}
+
+.btn-outlined {
+  background: transparent;
+  border: var(--border-width) solid var(--theme);
+  border-radius: var(--radius);
+  color: var(--theme);
+  font-weight: bold;
+  cursor: pointer;
+  padding: calc(var(--space-sm) - var(--border-width)) var(--space-sm);
+  text-decoration: none;
+}
+
+.mode-dark .btn-outlined {
+  border-color: var(--text);
+  color: var(--text);
+}
+
+.btn-outlined:hover {
+  border-color: var(--heading);
+  color: var(--heading);
+
+}
+
+.btn-outlined:focus {
+  border-color: var(--heading);
+  color: var(--heading);
+}
+
+.card {
+  background: var(--bg);
+  border-radius: var(--radius);
+  box-shadow:  var(--shadow);
+  color: var(--heading);
+  margin: 0;
+  padding: var(--space);
+  transition: all 0.3s ease;
+  position: relative;
+}
+

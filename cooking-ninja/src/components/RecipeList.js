@@ -14,7 +14,7 @@ export default function RecipeList({ recipes }) {
               <h3>{recipe.title}</h3>
               <h4>{recipe.cookingTime} to make.</h4>
               <p>{recipe.method.substring(0, 100)}&hellip;</p>
-              <button type="button">Cook This</button>
+              <button className="btn" type="button">Cook This</button>
             </Link>
         </li>
       ))}

@@ -1,6 +1,6 @@
 .create {
     max-width: 480px;
-    margin: var(--space-large) auto;
+    margin: var(--space-lg) auto;
   }
   .create label {
     display: block;
@@ -22,18 +22,15 @@
       padding-right: var(--space-sm)
   }
 
-  .create button {
+  /* .create button {
     display: block;
     width: 100px;
-    font-size: 1em;
-    color: var(--white);
     padding: 8px var(--space);
     border: 0;
     border-radius: var(--radius);
-    background-color: var(--red);
     cursor: pointer;
     text-decoration: none;
-  }
+  } */
 
   .col ~ button {
     margin-left: var(--space)

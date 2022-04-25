@@ -50,7 +50,7 @@ export default function Create() {
   return (
     <section className="create">
       <h1 className="page-title">Add a New Recipe</h1>
-      <form onSubmit={handleSubmit}>
+      <form className="card" onSubmit={handleSubmit}>
         <label htmlFor="rec-title">Title</label>
         <input
           type="text"
@@ -76,7 +76,7 @@ export default function Create() {
           <button
             type="button"
             onClick={handleAddNewIngredient()}
-            className="btn">
+            className="btn-outlined">
               add
           </button>
         </div>

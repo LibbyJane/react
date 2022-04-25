@@ -1,11 +1,16 @@
 import './App.css'
 import Routes from './Routes.js'
+import ThemeSelector from './components/ThemeSelector';
+import { useTheme } from './hooks/useTheme'
 
 function App() {
+  const { mode, color } = useTheme()
+
   return (
-    <div className="App">
+    <main className={`App mode-${mode} theme-${color}`}>
+      <ThemeSelector />
       <Routes />
-    </div>
+    </main>
   );
 }
 
