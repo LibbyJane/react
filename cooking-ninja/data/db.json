@@ -36,6 +36,21 @@
       ],
       "method": "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Esse minima ex rem quis similique eum ratione quaerat, voluptas molestias ut repudiandae delectus voluptates. Eius esse at tenetur ab accusamus excepturi?",
       "cookingTime": "35 minutes"
+    },
+    {
+      "id": "4",
+      "title": "Spicy Kohlrabi Fries with Aioli",
+      "ingredients": [
+        "2 Kohlrabi (or any mix of kohlrabi / muli / carrots / swede / other root vegetable)",
+        "2 tsp Smoked paprika",
+        "2 tbsp Olive oil",
+        "Salt & pepper ",
+        "1 Base",
+        "4 tbsp Mayonnaise",
+        "2 Garlic cloves (grated)"
+      ],
+      "method": "Preheat the oven to 200 C/180 fan/6 gas mark and line a large baking tray with baking paper. Slice the kohlrabi skin-on into 1.5 cm thick slices, then cut into long sticks. Place your kohlrabi fries onto your prepared baking tray. Sprinkle the fries with smoked paprika, salt and pepper. Drizzle with the olive oil and gently mix to coat well. Spread the fries in a single layer, onto the prepared baking tray. oast for 25-30 minutes, flipping halfway through until golden and crispy on all the sides. In a small mixing bowl, combine the mayonnaise/vegan mayonnaise and grated garlic. Set aside. Remove the fries from the oven and while they are still hot sprinkle with sea salt. Serve with the aioli.",
+      "cookingTime": "45 minutes"
     }
   ]
 }

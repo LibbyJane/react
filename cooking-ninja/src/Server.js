@@ -4,10 +4,13 @@ import https from 'https';
 import path from 'path';
 import fs from 'fs';
 
-const server = jsonServer.create();
+export default function Server() {
+    const server = jsonServer.create();
 
 const keyFile = path.join('', './cert.pem');
 const certFile = path.join('', './key.pem');
+
+console.log('server', server);
 
 https
   .createServer(
@@ -17,8 +20,14 @@ https
     },
     server
   )
-  .listen(3000, () => {
+  .listen(2000, () => {
     console.log(
-      'Go to https://localhost:3000/'
+      'Go to https://localhost:2000/'
     );
   });
+  return (
+    <>
+    </>
+  )
+}
+

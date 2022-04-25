@@ -11,10 +11,11 @@ export default function Create() {
   const [method, setMethod] = useState('')
   const ingredientInput = useRef(null)
 
-  const { postData, data, error } = useFetch('http://localhost:2000/recipes', 'POST')
+  const { postData, data, error } = useFetch('https://localhost:3001/recipes', 'POST')
   const history = useHistory()
 
   const handleSubmit = (e) => {
+    console.log('handle submit', e)
     e.preventDefault()
     postData({ title, ingredients, method, cookingTime: cookingTime + ' minutes' })
   }
@@ -48,7 +49,7 @@ export default function Create() {
 
   return (
     <section className="create">
-      <h1 className="page-title">Add a New Recipe {error} {data}</h1>
+      <h1 className="page-title">Add a New Recipe</h1>
       <form onSubmit={handleSubmit}>
         <label htmlFor="rec-title">Title</label>
         <input

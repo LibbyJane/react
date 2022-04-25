@@ -8,7 +8,7 @@ export const useFetch = (url, method = "GET") => {
 
   const postData = (postData) => {
     setOptions({
-      method: "POST",
+      method: method,
       headers: {
         "Content-Type": "application/json"
       },
@@ -20,7 +20,7 @@ export const useFetch = (url, method = "GET") => {
     const controller = new AbortController()
 
     const fetchData = async (fetchOptions) => {
-      console.log('fetchData', fetchData, fetchOptions)
+      // console.log('fetchData', fetchData, fetchOptions)
       setIsPending(true)
 
       try {
@@ -29,7 +29,7 @@ export const useFetch = (url, method = "GET") => {
           throw new Error(res.statusText)
         }
         const data = await res.json()
-
+        // console.log('data', data)
         setIsPending(false)
         setData(data)
         setError(null)

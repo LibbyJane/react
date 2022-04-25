@@ -3,8 +3,14 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
+## Json Server
+From the `data` directory, run:
+### `node Server.js`
+Json server will serve up the database at https://localhost:3001
 
-In the project directory, you can run:
+
+
+In the main project directory, you can run:
 
 ### `npm start`
 

@@ -1,7 +1,12 @@
 .searchbar form {
   display: flex;
-  align-items: center;
+    align-items: center;
 }
+
+.searchbar label {
+  margin: auto var(--space-sm) auto 0;
+}
+
 .searchbar input {
-  margin-left: 10px;
+  margin: 0;
 }

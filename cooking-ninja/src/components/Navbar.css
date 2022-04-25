@@ -12,6 +12,9 @@
   .navbar a.brand {
     margin-right: auto;
     color: var(--white);
+    display: block;
+    font-size: 1.5rem;
+    font-weight: bold;
     text-decoration: none;
   }
   .navbar a:last-child {
