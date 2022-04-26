@@ -73,6 +73,22 @@ input, textarea {
   flex: 1;
 }
 
+button {
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  padding: 0;
+}
+
+img {
+  display: inline-block;
+    height: auto;
+    width: auto;
+    max-height: 100%;
+    max-width: 100%;
+
+}
+
 .btn {
   background: var(--bg-outer);
   color: var(--theme-alt);

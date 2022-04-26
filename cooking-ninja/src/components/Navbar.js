@@ -1,13 +1,10 @@
 import { Link } from 'react-router-dom'
-import { useTheme } from '../hooks/useTheme'
 import Searchbar from './Searchbar'
 
 import './Navbar.css'
 
 
 export default function Navbar() {
-  const { color, changeColor } = useTheme()
-
   return (
     <div className="navbar">
       <nav>

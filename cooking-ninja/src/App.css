@@ -29,6 +29,7 @@ main {
   --radius: .25rem; /* 4px -> .25rem */
   --border-width: 2px;
   --shadow: 3px 3px 3px rgba(0, 0, 0, 0.05);
+  --transition: 250ms ease-in-out;
 
   --theme: var(--red);
   --theme-alt: var(--red-dark);

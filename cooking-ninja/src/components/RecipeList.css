@@ -25,6 +25,36 @@
     margin: var(--space) 0;
     line-height: 1.5em;
   }
+
   .recipe-list .card:hover {
     transform: scale(1.05);
   }
+
+  .recipe-list .delete {
+    /* border-radius: 50%; */
+    height: 1.35rem /* 20px -> 1.25rem */;
+    opacity: 0;
+    padding: 0.15rem;
+    position: absolute;
+      top: var(--space-sm);
+      right: var(--space-sm);
+    /* transition: background var(--transition); */
+  }
+
+  .recipe-list .card:hover .delete {
+    opacity: 0.5;
+  }
+
+  .recipe-list .card:hover .delete:hover {
+    /* background: var(--red); */
+    opacity: 1;
+    transform: none;
+  }
+
+  /* .recipe-list  .icon-delete {
+    transition: filter var(--transition);
+  } */
+
+  /* .recipe-list .delete:hover .icon-delete {
+    filter: invert(1)
+  } */
