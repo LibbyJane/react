@@ -1,0 +1,39 @@
+.navbar {
+    background: var(--bg-theme);
+    color: var(--theme-10);
+    margin: 0 0 var(space-lg);
+    padding: var(--space) var(--space) var(--space-sm);
+}
+
+.navbar nav {
+    display: flex;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.navbar ul {
+    display: flex;
+        align-items: center;
+    margin: 0 auto;
+    max-width: var(--max-content-width);
+}
+
+.title {
+  margin-right: auto;
+    font-weight: bold;
+    font-size: 1.2em;
+}
+
+.navbar button, .navbar a {
+    margin: auto 0 auto var(--space);
+}
+
+.title a {
+    margin: auto 0;
+}
+
+.navbar a {
+    color: currentColor;
+    text-decoration: none;
+}

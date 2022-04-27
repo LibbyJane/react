@@ -1,0 +1,43 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+/* base styles */
+body {
+    --font: Poppins, sans-serif;
+    --space: 1.25rem; /* 20px -> 1.25rem */
+    --space-sm: .5rem; /* 8px -> .5rem */
+    --space-lg: 2.5rem; /* 40px -> 2.5rem */
+    --radius: .25rem; /* 4px -> .25rem */
+    --radius-lg: 0.5rem;
+    --border-width: 2px;
+    --border: var(--border-width) solid;
+    --max-content-width: 60rem; /* 960px -> 60rem */
+    --box-shadow: 3px 3px 5px rgba(50,50,50,0.1);
+
+    --white: #fff;
+    --grey-e: #eee;
+    --grey-d: #ddd;
+    --grey-c: #ccc;
+    --grey-b: #bbb;
+    --grey-9: #999;
+    --grey-7: #777;
+    --grey-5: #555;
+    --grey-3: #333;
+    --grey-2: #222;
+    --black: #111;
+    --theme-primary: #007A74;
+    --theme-primary-1: #4FAFA8;
+    --theme-primary-3: #E6F4ED;
+    --theme-primary-10: #334B49;
+
+    --error: #980060;
+
+    --bg: var(--grey-e);
+    --bg-theme: var(--theme-primary-3);
+    --text: var(--grey-2);
+    --text-secondary: var(--grey-7);
+    --heading: var(--theme-primary);
+}
+
+* {
+    box-sizing: border-box;
+}

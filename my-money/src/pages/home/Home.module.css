@@ -1,0 +1,71 @@
+.container {
+    display: grid;
+        grid-template-columns: 2fr 1fr;
+    gap: 0 var(--space-lg);
+}
+
+.sidebar form {
+    background: var(--theme-primary);
+    border-radius: var(--radius-lg);
+
+    padding: var(--space-lg);
+}
+
+.sidebar label {
+    color: var(--white);
+}
+
+.sidebar button[type="submit"] {
+    color: var(--white);
+    border-color: var(--white);
+    font-size: 1rem;
+    width: 100%;
+}
+
+
+/* transactions */
+.transactions li {
+  color: var(--text-secondary);
+  margin: 0 auto var(--space);
+  border: 1px solid var(--theme-primary-3);
+  box-shadow: var(--box-shadow);
+  padding: var(--space);
+  display: flex;
+    align-items: center;
+    justify-content: space-between;
+  position: relative;
+  overflow: hidden;
+  border-left: 4px solid var(--theme-primary);
+}
+
+.transactions p {
+  color: currentColor;
+}
+ .transactions .name {
+  font-size: 1.4rem;
+}
+.transactions .amount {
+  margin-left: auto;
+  margin-right: var(--space-lg);
+  font-weight: bold;
+  font-size: 1.6em;
+}
+.transactions button {
+  position: absolute;
+    top: 0;
+    right:0;
+  background: var(--bg);
+  border: 0;
+  color: var(--text-secondary);
+  cursor: pointer;
+  line-height: 0.5;
+  padding: var(--space-sm);
+}
+
+  /* .sidebar aside {
+    margin-top: 40px;
+    color: #555;
+  }
+  .sidebar aside li {
+    margin: 10px;
+  } */

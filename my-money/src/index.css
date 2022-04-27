@@ -1,0 +1,84 @@
+/* base styles */
+body {
+    font-family: var(--font);
+    margin: 0;
+    font-size: 16px;
+}
+
+h1,h2,h3, h4, h5, h6, p, address, ul, li, label, input, textarea, button {
+    margin: 0 0 var(--space-sm);
+    padding: 0
+}
+
+h1, h2, h3, h4, h5, h6 {
+    color: var(--heading);
+}
+
+h1, h2, h3 {
+    margin: 0 0 var(--space);
+}
+
+ul {
+    list-style-type: none;
+}
+
+
+.container {
+    max-width: var(--max-content-width);
+    padding: var(--space-lg) var(--space) var(--space);
+    margin: 0 auto;
+}
+
+form {
+    color: var(--theme-primary-10);
+    margin: var(--space) auto;
+    padding: var(--space);
+}
+
+label {
+    color: var(--text);
+    display: block;
+}
+
+input,
+textarea,
+select {
+    border: 0;
+    border-radius: var(--radius);
+    color: currentColor;
+    font-family: var(--font);
+    margin-bottom: var(--space);
+    padding: var(--space-sm);
+    width: 100%;
+}
+
+button[type="submit"] {
+    margin-top: var(--space-sm)
+}
+
+button[type="submit"]:disabled {
+    filter: grayscale(0.75);
+    font-weight: 400;
+    pointer-events: none;
+}
+
+.btn, button[type="submit"] {
+    background: none;
+    border: var(--border) var(--theme-primary);
+    padding: var(--space-sm) var(--space);
+    border-radius: var(--radius);
+    color: var(--theme-primary);
+    font-weight: bold;
+    cursor: pointer;
+}
+
+
+button[type="submit"]:disabled {
+    filter: grayscale(0.75);
+    font-weight: 400;
+}
+
+.btn:hover, button[type="submit"]:hover {
+    background: var(--theme-primary);
+    color: var(--white);
+}
