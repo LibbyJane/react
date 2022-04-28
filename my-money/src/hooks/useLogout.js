@@ -9,16 +9,12 @@ export const useLogout = () => {
     const [isPending, setIsPending] = useState(false)
     const { dispatch } = useAuthContext()
 
-    console.log('1) useLogout fn, isCancelled?', isCancelled)
-
     const logout = async () => {
         setError(null)
         setIsPending(true)
 
         try {
-            console.log('3) useLogout try, isCancelled?', isCancelled)
             await projectAuth.signOut()
-            console.log('4) useLogout dispatch LOGOUT')
             dispatch({ type: 'LOGOUT' })
 
             if (!isCancelled) {
@@ -35,7 +31,6 @@ export const useLogout = () => {
     }
 
     useEffect( () => {
-        console.log('2) use logout use effect, setIsCancelled(true)')
         return () => setIsCancelled(true)
     }, [])
 

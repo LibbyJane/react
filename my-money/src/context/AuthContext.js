@@ -5,7 +5,6 @@ import { projectAuth } from '../firebase/config' // needed to set authIsReady
 export const AuthContext = createContext()
 
 export const authReducer = (state, action) => {
-    console.log('auth reducer', action)
     switch (action.type) {
         case 'AUTH_IS_READY':
             return { ...state, user: action.payload, authIsReady: true }
@@ -30,8 +29,6 @@ export const AuthContextProvider = ( { children } ) => {
             unsub()
         })
     }, [])
-
-    console.log('Auth context state:', state)
 
     return (
         <AuthContext.Provider value={ {...state, dispatch}}>

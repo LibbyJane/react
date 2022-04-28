@@ -3,8 +3,7 @@ import { useFirestore } from '../../hooks/useFirestore'
 import styles from './Home.module.css'
 
 export default function TransactionList({ transactions }) {
-    const { deleteDocument, response } = useFirestore('transactions')
-    console.log('response', response)
+    const { deleteDocument } = useFirestore('transactions')
 
     return (
         <ul className={styles.transactions}>

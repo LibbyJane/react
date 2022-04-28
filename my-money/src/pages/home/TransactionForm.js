@@ -8,7 +8,7 @@ export default function TransactionForm({ uid }) {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        console.log('submitted')
+
         addDocument({
             uid,
             name,
@@ -18,7 +18,6 @@ export default function TransactionForm({ uid }) {
 
     // reset the form fields
     useEffect(() => {
-        console.log('ue response', response)
         if (response.success) {
             setName('')
             setAmount('')
