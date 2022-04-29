@@ -3,32 +3,32 @@ import { useHistory } from 'react-router'
 import Select from 'react-select'
 import { useCollection } from '../../hooks/useCollection'
 import { useAuthContext } from '../../hooks/useAuthContext'
-import { useFirestore } from '../../hooks/useFirestore'
-import { timestamp } from '../../firebase/config'
 import Error from '../../components/Error'
+import { useAddNote } from '../../hooks/useAddNote'
 
 import './Create.css'
 
-const categories = [
-    { value: 'development', label: 'Development' },
-    { value: 'design', label: 'Design' },
-    { value: 'sales', label: 'Sales' },
-    { value: 'marketing', label: 'Marketing' },
+const styles = [
+    { value: 'postcard', label: 'Post Card' },
+    { value: 'stickynote', label: 'Sticky Note' }
 ]
 
 export default function Create() {
     const history = useHistory()
-    const { addDocument, response } = useFirestore('projects')
     const { user } = useAuthContext()
     const { documents } = useCollection('users')
     const [users, setUsers] = useState([])
 
-    const [name, setName] = useState('')
-    const [details, setDetails] = useState('')
-    const [dueDate, setDueDate] = useState('')
-    const [category, setCategory] = useState('')
-    const [assignedUsers, setAssignedUsers] = useState([])
+    const [noteImage, setNoteImage] = useState(null)
+    const [noteImageError, setNoteImageError] = useState(null)
+
+    const [message, setMessage] = useState('')
+    const [style, setStyle] = useState('')
+    const [recipients, setRecipients] = useState([])
     const [formError, setFormError] = useState(null)
+    const { addNote, isPending, error } = useAddNote()
+
+    console.log('user', user)
 
     // create user values for react-select
     useEffect(() => {
@@ -49,20 +49,43 @@ export default function Create() {
         }
     }, [documents])
 
+    const handleFileChange = (e) => {
+        setNoteImage(null)
+        let selected = e.target.files[0]
+        console.log(selected)
+
+        if (!selected) {
+            setNoteImageError('Please select a file')
+            return
+        }
+        if (!selected.type.includes('image')) {
+            setNoteImageError('Selected file must be an image')
+            return
+        }
+        if (selected.size > 100000) {
+            setNoteImageError('Image file size must be less than 100kb')
+            return
+        }
+
+        setNoteImageError(null)
+        setNoteImage(selected)
+        console.log('image updated')
+    }
+
     const handleSubmit = async (e) => {
         e.preventDefault()
         setFormError(null)
 
-        if (!category) {
-            setFormError('Please select a project category.')
+        if (!style) {
+            setFormError('Please select a note style.')
             return
         }
-        if (assignedUsers.length < 1) {
-            setFormError('Please assign the project to at least 1 user')
+        if (recipients.length < 1) {
+            setFormError('Please assign the note to at least 1 user')
             return
         }
 
-        const assignedUsersList = assignedUsers.map(u => {
+        const recipientsList = recipients.map(u => {
             return {
                 displayName: u.value.displayName,
                 photoURL: u.value.photoURL,
@@ -75,21 +98,25 @@ export default function Create() {
             id: user.uid
         }
 
-        const project = {
-            name,
-            details,
-            category: category.value,
-            dueDate: timestamp.fromDate(new Date(dueDate)),
-            assignedUsersList,
-            createdBy,
-            comments: []
+        const note = {
+            // name,
+            message,
+            recipientsList,
+            createdBy
         }
 
-        await addDocument(project)
-
-        if (!response.error) {
-            history.push('/')
+        if (style) {
+            note.style = style.value;
         }
+
+
+
+        await addNote(note, noteImage)
+
+
+        // if (!response.error) {
+        //     history.push('/')
+        // }
     }
 
     // // if using html select
@@ -97,61 +124,82 @@ export default function Create() {
     //     const selectedValues = [...field.options]
     //         .filter(x => x.selected)
     //         .map(x => x.value);
-    //     setAssignedUsers(selectedValues);
+    //     setRecipients(selectedValues);
     // }
 
     return (
         <>
-            <h1 className="page-title">Create a new Project</h1>
+            <h1 className="page-title">Create a new note</h1>
             <form onSubmit={handleSubmit}>
-                <label>Project name:</label>
+                {/* <label>note name:</label>
                 <input
                     required
                     type="text"
                     onChange={(e) => setName(e.target.value)}
                     value={name}
-                />
+                /> */}
 
-                <label>Project Details:</label>
+                <label>Style:</label>
+                <Select
+                    className='react-select-container'
+                    classNamePrefix="react-select"
+                    onChange={(option) => setStyle(option)}
+                    options={styles}
+                >
+
+                </Select>
+
+                <label>write your message</label>
                 <textarea
                     required
-                    onChange={(e) => setDetails(e.target.value)}
-                    value={details}
+                    onChange={(e) => setMessage(e.target.value)}
+                    value={message}
                 ></textarea>
-
+                {/*
                 <label>Set due date:</label>
                 <input
                     required
                     type="date"
                     onChange={(e) => setDueDate(e.target.value)}
                     value={dueDate}
-                />
-                <label>Project category:</label>
-                <Select
-                    className='react-select-container'
-                    classNamePrefix="react-select"
-                    onChange={(option) => setCategory(option)}
-                    options={categories}
-                >
+                /> */}
 
-                </Select>
 
                 {/* <select
-                    onChange={(e) => setCategory(e.target.value)}
+                    onChange={(e) => setStyle(e.target.value)}
                 >
-                    {categories.map(category => {
-                        return <option key={category.value} value={category.value}>{category.label}</option>
+                    {styles.map(style => {
+                        return <option key={style.value} value={style.value}>{style.label}</option>
                     })}
                 </select> */}
 
-                <label>Assign to:</label>
+                <label>Send to:</label>
                 <Select
                     className='react-select-container'
                     classNamePrefix="react-select"
-                    onChange={(option) => setAssignedUsers(option)}
+                    onChange={(option) => setRecipients(option)}
                     options={users}
                     isMulti
                 />
+
+                {style.value === 'postcard' && (
+                    <>
+                        <label htmlFor="noteImage">Note image</label>
+                        <input
+                            name="noteImage"
+                            id="noteImage"
+                            required
+                            type="file"
+                            onChange={handleFileChange}
+                        />
+                        {noteImageError && <Error message={noteImageError} />}
+                    </>
+
+                )
+
+                }
+
+
 
                 {/* <select
                     multiple
@@ -162,7 +210,7 @@ export default function Create() {
                     })}
                 </select> */}
 
-                <button className="btn">Add Project</button>
+                <button className="btn">Add note</button>
 
                 {formError && <Error message={formError} />}
             </form>
