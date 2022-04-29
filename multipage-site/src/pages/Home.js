@@ -7,7 +7,6 @@ import './Home.css'
 export default function Home() {
   const { data: articles, isPending, error } = useFetch('./data/db.json')
   const resp = useFetch('./data/db.json')
-  console.log('resp', resp)
 
 return (
     <section className="home">

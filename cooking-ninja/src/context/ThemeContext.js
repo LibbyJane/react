@@ -3,7 +3,7 @@ import { createContext, useReducer } from 'react'
 export const ThemeContext = createContext()
 
 const themeReducer = (state, action) => {
-    console.log('themeReducer action', action)
+    // console.log('themeReducer action', action)
     switch (action.type) {
         case 'CHANGE_COLOR':
             return { ...state, color: action.payload }
@@ -25,7 +25,6 @@ export function ThemeProvider({ children }) {
     }
 
     const changeMode = (mode) => {
-        console.log('changemode', mode);
         dispatch({ type: 'CHANGE_MODE', payload: mode })
     }
 

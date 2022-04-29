@@ -1,0 +1,62 @@
+.sidebar {
+    background: var(--theme-primary);
+    color: var(--white);
+    min-height: 100vh;
+    min-width: 300px;
+    position: relative;
+    width: 300px;
+}
+
+.sb-content {
+    position: fixed;
+    width: inherit;
+}
+
+.sb-user {
+    border-bottom: var(--border) rgba(255,255,255,0.2);
+    font-weight: bold;
+    padding: var(--space-md) var(--space-md);
+    text-align: center;
+}
+
+
+/* avatar in sidebar */
+.sb-user .avatar {
+    border: 3px solid var(--white);
+    height: 70px;
+    width: 70px;
+    margin-bottom: var(--space-sm);
+}
+
+.sb-links {
+    margin-left: var(--space-md);
+    margin-top: var(--space-lg);
+}
+
+.sb-links li {
+    margin-top: var(--space-sm);
+}
+
+.sb-links a {
+    box-sizing: border-box;
+    color: var(--white);
+    display: flex;
+    padding: var(--space-sm);
+    text-decoration: none;
+    width: 100%;
+}
+
+.sb-links img {
+    filter: invert(100%);
+    margin-right: var(--space-sm);
+}
+
+.sb-links a.active {
+    background: var(--bg-color);
+    border-radius: var(--space-md) 0 0 var(--space-md);
+    color: var(--grey-5);
+}
+
+.sb-links .active img {
+    filter: invert(40%);
+}

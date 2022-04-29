@@ -13,7 +13,6 @@ export default function TripList() {
   }, [url])
 
   useEffect(() => {
-    console.log('useEffect function ran')
     fetchTrips()
 
   }, [fetchTrips])

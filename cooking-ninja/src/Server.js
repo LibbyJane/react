@@ -10,8 +10,6 @@ export default function Server() {
 const keyFile = path.join('', './cert.pem');
 const certFile = path.join('', './key.pem');
 
-console.log('server', server);
-
 https
   .createServer(
     {

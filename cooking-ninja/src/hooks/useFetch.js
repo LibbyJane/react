@@ -46,7 +46,6 @@ export const useFetch = (url, method = "GET") => {
     switch(method.toLowerCase()) {
       case('post'):
         if (options) {
-          console.log('options', options)
           fetchData(options)
         }
         break

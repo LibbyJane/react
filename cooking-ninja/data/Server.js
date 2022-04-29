@@ -36,8 +36,6 @@ server.use(router);
 const keyFile = path.join(__dirname, 'key.pem');
 const certFile = path.join(__dirname, 'cert.pem');
 
-console.log('files', keyFile, certFile)
-
 https
   .createServer(
     {
