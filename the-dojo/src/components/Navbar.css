@@ -1,7 +1,12 @@
 .navbar {
-    margin-bottom: var(--space-lg);
+    /* margin-bottom: var(--space-lg); */
     padding: var(--space-lg) 0;
     width: 100%;
+}
+
+.navbar h1 {
+    margin: 0;
+    padding: 0;
 }
 
 .navbar ul {

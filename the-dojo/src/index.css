@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;900&family=Klee+One:wght@400;600&display=swap');
 
 * {
     box-sizing: border-box;
@@ -7,7 +7,9 @@
 /* variables */
 :root {
     --font: Poppins, sans-serif;
+    --font-hand: 'Klee One', cursive;
     --space: 1rem; /* 20px -> 1.25rem */
+    --space-xs: .25rem; /* 8px -> .5rem */
     --space-sm: .5rem; /* 8px -> .5rem */
     --space-md: 2rem; /* 30px -> 1.875rem */
     --space-lg: 2.5rem; /* 40px -> 2.5rem */
@@ -19,7 +21,8 @@
     --max-content-width: 60rem; /* 960px -> 60rem */
     --max-form-width: 23rem;
     --max-form-width-md: 30rem;
-    --box-shadow: 3px 3px 5px rgba(0,0,0,0.05);
+    --box-shadow: 0px 4px 6px rgba(0,0,0,0.05);
+    --transition: 200ms ease-in-out;
 
     --white: #fff;
     --grey-e: #eee;
@@ -99,6 +102,11 @@ li {
     padding: var(--space);
 }
 
+.card img {
+    display: block;
+    max-width: 100%;
+}
+
 /* layout */
 .page-title {
     color: var(--heading-color);
@@ -172,9 +180,53 @@ input, textarea, select {
     padding: var(--space-sm) var(--space);
 }
 
+input[type="checkbox"], input[type="radio"] {
+    appearance: auto;
+    -webkit-appearance: auto;
+    background: transparent;
+    width: auto;
+}
+
 textarea {
     min-height: 160px;
 }
+
+.checkable {
+    cursor: pointer;
+    position: relative;
+}
+
+.checkable img {
+    transition: opacity var(--transition)
+}
+
+
+.checkable input {
+    appearance: none;
+    cursor: pointer;
+    opacity: 0;
+    margin: 0;
+    padding: 0;
+    position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+    z-index: 10;
+}
+
+.visually-hidden {
+    border: 0;
+    clip: rect(0 0 0 0);
+    height: auto;
+    margin: 0;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+    white-space: nowrap;
+}
+
 
 
 /* .error {

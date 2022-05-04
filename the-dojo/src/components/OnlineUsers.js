@@ -20,7 +20,7 @@ export default function OnlineUsers() {
                             return <li key={user.id} className="user-list-item" data-online={user.online}>
                                 <span className="ul-status"></span>
                                 <span className="ul-name">{user.displayName}</span>
-                                <Avatar src={user.photoURL} />
+                                <Avatar src={user.photoURL} name={user.displayName} />
                             </li>
                         }
                     })}

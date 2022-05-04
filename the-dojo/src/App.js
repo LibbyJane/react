@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom'
 import { useAuthContext } from "./hooks/useAuthContext"
 
@@ -5,7 +6,7 @@ import Dashboard from './pages/dashboard/Dashboard'
 import Create from './pages/create/Create'
 import Login from './pages/login/Login'
 import Signup from './pages/signup/Signup'
-import Project from './pages/project/Project'
+import Note from './pages/note/Note'
 
 import Navbar from './components/Navbar'
 import Sidebar from './components/Sidebar'
@@ -15,7 +16,7 @@ import './App.css'
 
 function App() {
     const { authIsReady, user } = useAuthContext()
-    console.log('user', user)
+    const [pageTitle, setPageTitle] = useState('Home')
 
     return (
         <>
@@ -24,19 +25,19 @@ function App() {
                     <BrowserRouter>
                         <Sidebar />
                         <div className="container">
-                            <Navbar />
+                            <Navbar title={pageTitle} />
 
                             <Switch>
                                 <Route exact path="/">
-                                    {user && <Dashboard />}
+                                    {user && <Dashboard setPageTitle={setPageTitle} />}
                                     {!user && <Redirect to="/login" />}
                                 </Route>
                                 <Route path="/create">
-                                    {user && <Create />}
+                                    {user && <Create setPageTitle={setPageTitle} />}
                                     {!user && <Redirect to="/login" />}
                                 </Route>
-                                <Route path="/projects/:id">
-                                    {user && <Project />}
+                                <Route path="/notes/:id">
+                                    {user && <Note setPageTitle={setPageTitle} />}
                                     {!user && <Redirect to="/login" />}
                                 </Route>
                                 <Route path="/login">

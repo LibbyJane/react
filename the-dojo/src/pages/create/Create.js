@@ -1,10 +1,12 @@
 import { useState, useEffect } from 'react'
 import { useHistory } from 'react-router'
 import Select from 'react-select'
+
 import { useCollection } from '../../hooks/useCollection'
 import { useAuthContext } from '../../hooks/useAuthContext'
-import Error from '../../components/Error'
 import { useAddNote } from '../../hooks/useAddNote'
+import { timestamp } from '../../firebase/config'
+import Error from '../../components/Error'
 
 import './Create.css'
 
@@ -22,13 +24,12 @@ export default function Create() {
     const [noteImage, setNoteImage] = useState(null)
     const [noteImageError, setNoteImageError] = useState(null)
 
+    const [expiryDate, setExpiryDate] = useState('')
     const [message, setMessage] = useState('')
     const [style, setStyle] = useState('')
     const [recipients, setRecipients] = useState([])
     const [formError, setFormError] = useState(null)
     const { addNote, isPending, error } = useAddNote()
-
-    console.log('user', user)
 
     // create user values for react-select
     useEffect(() => {
@@ -52,7 +53,6 @@ export default function Create() {
     const handleFileChange = (e) => {
         setNoteImage(null)
         let selected = e.target.files[0]
-        console.log(selected)
 
         if (!selected) {
             setNoteImageError('Please select a file')
@@ -69,7 +69,6 @@ export default function Create() {
 
         setNoteImageError(null)
         setNoteImage(selected)
-        console.log('image updated')
     }
 
     const handleSubmit = async (e) => {
@@ -87,8 +86,6 @@ export default function Create() {
 
         const recipientsList = recipients.map(u => {
             return {
-                displayName: u.value.displayName,
-                photoURL: u.value.photoURL,
                 id: u.value.id
             }
         })
@@ -102,14 +99,10 @@ export default function Create() {
             // name,
             message,
             recipientsList,
-            createdBy
+            createdBy,
+            expiryDate: timestamp.fromDate(new Date(expiryDate)),
+            style: style ? style.value : null
         }
-
-        if (style) {
-            note.style = style.value;
-        }
-
-
 
         await addNote(note, noteImage)
 
@@ -155,14 +148,14 @@ export default function Create() {
                     onChange={(e) => setMessage(e.target.value)}
                     value={message}
                 ></textarea>
-                {/*
-                <label>Set due date:</label>
+
+                <label>Expiry date:</label>
                 <input
                     required
                     type="date"
-                    onChange={(e) => setDueDate(e.target.value)}
-                    value={dueDate}
-                /> */}
+                    onChange={(e) => setExpiryDate(e.target.value)}
+                    value={expiryDate}
+                />
 
 
                 {/* <select

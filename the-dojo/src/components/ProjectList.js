@@ -14,10 +14,10 @@ export default function ProjectList({ projects }) {
                         <p>Due by {project.dueDate.toDate().toDateString()}</p>
                         <div className="assigned-to">
                             <p><strong>Assigned to:</strong></p>
-                            <ul className="avatar-list">
+                            <ul className="list-avatars">
                                 {project.assignedUsersList.map(user => (
                                     <li key={user.id}>
-                                        <Avatar src={user.photoURL} />
+                                        <Avatar src={user.photoURL} name={user.displayName} />
                                     </li>
                                 ))}
                             </ul>

@@ -1,22 +1,47 @@
 .list-notes {
     display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
         grid-gap: var(--space-md);
+        justify-content: start;
 }
 
-.avatar-list {
+.list-notes .card {
+    /* order: 1; */
     display: flex;
-        flex-wrap: wrap;
+        flex-direction: column;
+
+    overflow: hidden;
+    padding-top: 0;
+    margin-right: auto;
 }
 
-.avatar-list li {
-    margin: 0 var(--space-sm) var(--space-sm) 0;
+/* .list-notes .card[data-saved="true"] {
+    order: 0;
+} */
+
+.list-notes .card-header {
+    background: transparent;
+    display: flex;
+        justify-content: flex-end;
+    margin: 0;
+    padding: 0;
 }
 
-.avatar-list .avatar {
-    display: block;
-        width: 1.875rem;
-        height: 1.875rem;
+.list-notes .card-footer  {
+    display: flex;
+        align-items: center;
+    margin-top: auto;
+}
+
+.list-notes .card-footer .avatar {
+    --size: 1.2rem;
+    height: var(--size);
+    width: var(--size);
+}
+
+.list-notes .card-footer p {
+    margin: 0;
+    padding: 0;
 }
 
 .list-notes a {
@@ -30,5 +55,56 @@
 
 .list-notes p {
     color: var(--text);
+    font-family: var(--font-hand);
+    font-weight: 600;
 }
 
+.note-image {
+    margin-bottom: var(--space-sm);
+}
+
+.note-message {
+    font-size: 1.3rem;
+}
+
+.list-notes .checkable {
+    margin: 0;
+        margin-left: auto;
+    padding: var(--space-sm);
+    padding-right: 0;
+        /* top: var(--space-xs);
+        right: var(--space-xs); */
+}
+
+
+.list-notes input:checked~img {
+    opacity: 1;
+}
+
+
+.list-notes .checkable img {
+    --size: 1rem;
+    height: var(--size);
+    width: var(--size);
+    opacity: 0.5;
+}
+
+.list-notes .checkable:hover img,
+.list-notes .checkable:focus img {
+    opacity: 1;
+}
+
+/* .list-avatars {
+    display: flex;
+        flex-wrap: wrap;
+}
+
+.list-avatars li {
+    margin: 0 var(--space-sm) var(--space-sm) 0;
+}
+
+.list-avatars .avatar {
+    display: block;
+        width: 1.875rem;
+        height: 1.875rem;
+} */

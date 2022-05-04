@@ -4,16 +4,16 @@
         grid-gap: var(--space-md);
 }
 
-.avatar-list {
+.list-avatars {
     display: flex;
         flex-wrap: wrap;
 }
 
-.avatar-list li {
+.list-avatars li {
     margin: 0 var(--space-sm) var(--space-sm) 0;
 }
 
-.avatar-list .avatar {
+.list-avatars .avatar {
     display: block;
         width: 1.875rem;
         height: 1.875rem;

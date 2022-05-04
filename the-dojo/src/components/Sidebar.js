@@ -34,8 +34,7 @@ export default function Sidebar() {
                         </li>
                     </ul>
                 </nav>
-
-                <OnlineUsers />
+                {user && <OnlineUsers /> }
             </div>
         </aside>
     )

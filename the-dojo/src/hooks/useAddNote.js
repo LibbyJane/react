@@ -23,9 +23,15 @@ export const useAddNote = () => {
                 const uploadPath = `noteImages/${uid}/${image.name}`
                 const img = await projectStorage.ref(uploadPath).put(image)
                 console.log('img', image)
-                const photoURL = await img.ref.getDownloadURL()
-                note = {...note, photoURL}
+                const noteImage = {
+                    URL: await img.ref.getDownloadURL(),
+                    name: image.name
+                }
+
+                note = {...note, noteImage}
             }
+
+            console.log('note', note)
 
             await addDocument(note)
             console.log('response', response)

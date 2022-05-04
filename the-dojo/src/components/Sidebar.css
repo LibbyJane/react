@@ -2,9 +2,8 @@
     background: var(--theme-primary);
     color: var(--white);
     min-height: 100vh;
-    min-width: 300px;
     position: relative;
-    width: 300px;
+    width: 220px;
 }
 
 .sb-content {
