@@ -1,7 +1,10 @@
 import { useState, useEffect } from 'react'
 // storage for the user's avatar, firestore to make a document for the user
-import { projectAuth, projectStorage, projectFirestore } from '../firebase/config'
+import { projectAuth, db } from '../firebase/config'
 import { useAuthContext } from './useAuthContext'
+import { doc, setDoc } from 'firebase/firestore'
+import { getStorage, ref, uploadBytes, getDownloadURL} from "firebase/storage";
+import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth'
 
 export const useSignup = () => {
     const [isCancelled, setIsCancelled] = useState(false)
@@ -14,27 +17,60 @@ export const useSignup = () => {
         setIsPending(true)
 
         try {
-            // signup
-            const res = await projectAuth.createUserWithEmailAndPassword(email, password)
+
+            const res = await createUserWithEmailAndPassword(projectAuth, email, password)
 
             if (!res) {
                 throw new Error('Could not complete signup')
             }
 
+            // Create a reference with an initial file path and name
+            const storage = getStorage();
             const uploadPath = `thumbnails/${res.user.uid}/${thumbnail.name}`
-            const img = await projectStorage.ref(uploadPath).put(thumbnail)
-            const photoURL = await img.ref.getDownloadURL()
+            const storageRef = ref(storage, uploadPath);
 
-            await res.user.updateProfile({ displayName, photoURL })
+            uploadBytes(storageRef, thumbnail).then((snapshot) => {
+                console.log('snapshot', snapshot)
+                console.log(' projectAuth.currentUser',  projectAuth.currentUser)
 
-            // create a user document
-            await projectFirestore.collection('users').doc(res.user.uid).set({
-                online: true,
-                displayName,
-                photoURL
-            })
+                getDownloadURL(storageRef)
+                .then((url) => {
+                    console.log('url', url)
+                    updateProfile(projectAuth.currentUser, {
+                        displayName: displayName, photoURL: url
+                      }).then(() => {
+                          console.log('update users collection')
+                            setDoc(doc(db, 'users', res.user.uid), {
+                                displayName: displayName, photoURL: url, online: true
+                            });
+                            dispatch({type: 'LOGIN', payload: res.user})
+                      }).catch((error) => {
+                        // An error occurred
+                        // ...
+                      });
 
-            dispatch({type: 'LOGIN', payload: res.user})
+                })
+                .catch((error) => {
+                    console.log('error', error)
+                });
+            });
+
+
+
+
+            // const img = await projectStorage.ref(uploadPath).put(thumbnail)
+            // const photoURL = await img.ref.getDownloadURL()
+
+            // await res.user.updateProfile({ displayName, photoURL })
+
+            // // create a user document
+            // await db.collection('users').doc(res.user.uid).set({
+            //     online: true,
+            //     displayName,
+            //     photoURL
+            // })
+
+
 
             if (!isCancelled) {
                 setIsPending(false)

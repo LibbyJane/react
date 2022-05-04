@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
-import { projectAuth, projectFirestore } from '../firebase/config'
+import { projectAuth, db } from '../firebase/config'
 import { useAuthContext } from './useAuthContext'
+import { signOut } from 'firebase/auth'
 
 export const useLogout = () => {
     const [isCancelled, setIsCancelled] = useState(false)
@@ -14,12 +15,12 @@ export const useLogout = () => {
 
         try {
             // update status first while the user is still authenticated & has permission
-            const { uid } = projectAuth.currentUser
-            await projectFirestore.collection('users').doc(uid).update({
-                online: false
-            })
+            // const { uid } = projectAuth.currentUser
+            // await db.collection('users').doc(uid).update({
+            //     online: false
+            // })
 
-            await projectAuth.signOut()
+            await signOut(projectAuth)
 
             dispatch({ type: 'LOGOUT' })
 

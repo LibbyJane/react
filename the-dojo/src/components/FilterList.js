@@ -1,27 +1,16 @@
-import { useState } from 'react'
 import './FilterList.css'
 
 export default function FilterList({filters, changeFilter}) {
-    const [currentFilter, setCurrentFilter] = useState('all')
-
     const handleClick = (newFilter) => {
-        setCurrentFilter(newFilter)
         changeFilter(newFilter)
     }
 
     return (
         <aside className="filter-bar">
-            {/* {filterList.map((f) => (
-                <button key={f}
-                    onClick={() => handleClick(f)}
-                    className={currentFilter === f ? 'active' : ''}
-                >{f}</button>
-            ))} */}
-
-            <ul class="list-filters">
+            <ul className="list-filters">
                 {filters.map((f) => (
-                    <li>
-                        <label key={f}>
+                    <li key={f}>
+                        <label>
                             <input
                                 type="radio"
                                 name="filterBy"

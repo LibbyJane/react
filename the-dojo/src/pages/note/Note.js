@@ -1,4 +1,4 @@
-import { projectFirestore } from '../../firebase/config'
+import { db } from '../../firebase/config'
 import { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 
@@ -8,7 +8,7 @@ import NoteComments from './NoteComments'
 
 import './Note.css'
 
-export default function Note() {
+export default function Note({setPageTitle}) {
     const { id } = useParams()
     const [isPending, setIsPending] = useState(false)
     const [error, setError] = useState(null)
@@ -17,7 +17,7 @@ export default function Note() {
     useEffect(() => {
         setIsPending(true)
 
-        const unsubscribeFromRealtimeData = projectFirestore.collection('notes').doc(id).onSnapshot(doc => {
+        const unsubscribeFromRealtimeData = db.collection('notes').doc(id).onSnapshot(doc => {
             if (doc.exists) {
                 setNote(doc.data())
             } else {

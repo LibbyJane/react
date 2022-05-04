@@ -1,11 +1,11 @@
 import { useState, useEffect } from 'react'
 import { useHistory } from 'react-router'
 import Select from 'react-select'
+import {Timestamp } from 'firebase/firestore'
 
 import { useCollection } from '../../hooks/useCollection'
 import { useAuthContext } from '../../hooks/useAuthContext'
 import { useAddNote } from '../../hooks/useAddNote'
-import { timestamp } from '../../firebase/config'
 import Error from '../../components/Error'
 
 import './Create.css'
@@ -15,8 +15,7 @@ const styles = [
     { value: 'stickynote', label: 'Sticky Note' }
 ]
 
-export default function Create({setPageTitle}) {
-    setPageTitle('Send a note')
+export default function Create() {
     const history = useHistory()
     const { user } = useAuthContext()
     const { documents } = useCollection('users')
@@ -101,7 +100,7 @@ export default function Create({setPageTitle}) {
             message,
             recipientsList,
             createdBy,
-            expiryDate: timestamp.fromDate(new Date(expiryDate)),
+            expiryDate: Timestamp.fromDate(new Date(expiryDate)),
             style: style ? style.value : null
         }
 

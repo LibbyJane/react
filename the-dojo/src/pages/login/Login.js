@@ -1,6 +1,3 @@
-// styles
-import './Login.css'
-
 import { useState } from 'react'
 import { useLogin } from '../../hooks/useLogin'
 
@@ -8,8 +5,7 @@ import Error from '../../components/Error'
 
 import './Login.css'
 
-export default function Login({setPageTitle}) {
-    setPageTitle('Welcome')
+export default function Login() {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const { login, isPending, error } = useLogin()

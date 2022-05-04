@@ -8,11 +8,10 @@ import FilterList from "../../components/FilterList"
 
 import './Dashboard.css'
 
-export default function Dashboard({setPageTitle}) {
+export default function Dashboard() {
     const { user } = useAuthContext()
     const filters = ['all', 'saved', 'has image']
     const [filter, setFilter] = useState('all')
-    setPageTitle('Dashboard')
 
     const { documents, error } = useCollection(
         'notes',
@@ -40,8 +39,6 @@ export default function Dashboard({setPageTitle}) {
                 return assignedToMe
             case 'has image':
                 return document.noteImage
-            case 'from':
-
             default:
                 return true
         }

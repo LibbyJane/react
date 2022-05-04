@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { projectFirestore } from "../firebase/config"
+import { db } from "../firebase/config"
 
 export const useDocument = (collection, id) => {
     const [document, setDocument] = useState(null)
@@ -7,7 +7,7 @@ export const useDocument = (collection, id) => {
 
     // realtime document data
     useEffect(() => {
-        const ref = projectFirestore.collection(collection).doc(id)
+        const ref = db.collection(collection).doc(id)
 
         const unsubscribeFromRealtimeData = ref.onSnapshot(snapshot => {
             // need to make sure the doc exists & has data

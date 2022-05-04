@@ -10,6 +10,7 @@ import AddIcon from '../assets/icons/add.svg'
 
 export default function Sidebar() {
     const { user } = useAuthContext()
+    console.log('user', user)
 
     return (
         <aside className="sidebar">
