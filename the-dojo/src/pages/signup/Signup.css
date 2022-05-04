@@ -1,8 +1,0 @@
-.auth-form {
-    background: var(--white);
-    border: var(--border) var(--grey-d);
-    box-shadow: var(--box-shadow);
-    margin: var(--space-lg) auto;
-    padding: var(--space-lg);
-    max-width: var(--max-form-width);
-}

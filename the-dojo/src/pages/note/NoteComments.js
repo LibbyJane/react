@@ -1,4 +1,5 @@
 import { useState } from "react"
+import formatDistanceToNow from 'date-fns/formatDistanceToNow'
 import { timestamp } from "../../firebase/config"
 import { useAuthContext } from "../../hooks/useAuthContext"
 import { useFirestore } from "../../hooks/useFirestore"
@@ -47,7 +48,7 @@ export default function NoteComments({note, id}) {
                 <ul>
                 { note.comments.map(comment => (
                     <li className={`comment  ${comment.uid === user.uid ? 'user-authored' : ''}`} key={comment.id}>
-                        <p className="comment-date">{note.createdAt.toDate().toLocaleDateString()} at {note.createdAt.toDate().toLocaleTimeString()}</p>
+                        <p className="comment-date">{formatDistanceToNow(note.createdAt.toDate(), {addSuffix: true})}</p>
 
                         <div className="comment-content">
                             <p>{comment.content}</p>

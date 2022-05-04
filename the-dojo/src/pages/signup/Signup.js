@@ -4,7 +4,8 @@ import Error from '../../components/Error'
 
 import './Signup.css'
 
-export default function Signup() {
+export default function Signup({setPageTitle}) {
+    setPageTitle('Welcome')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [displayName, setDisplayName] = useState('')
@@ -20,7 +21,6 @@ export default function Signup() {
     const handleFileChange = (e) => {
         setThumbnail(null)
         let selected = e.target.files[0]
-        console.log(selected)
 
         if (!selected) {
             setThumbnailError('Please select a file')
@@ -37,12 +37,14 @@ export default function Signup() {
 
         setThumbnailError(null)
         setThumbnail(selected)
-        console.log('thumbnail updated')
     }
 
     return (
-        <form onSubmit={handleSubmit} className="auth-form">
-            <h2>sign up</h2>
+        <form onSubmit={handleSubmit} className="form-signup card">
+            <header className="card-header">
+                Sign Up
+            </header>
+
             <label>
                 <span>email:</span>
                 <input
@@ -79,8 +81,8 @@ export default function Signup() {
                 />
                 {thumbnailError && <Error message={thumbnailError}/>}
             </label>
-            {!isPending && <button className="btn">Sign up</button>}
-            {isPending && <button className="btn" disabled>loading</button>}
+            {!isPending && <button className="btn" type="submit">Sign up</button>}
+            {isPending && <button className="btn" disabled type="submit">loading</button>}
             {error && <Error message={error} />}
         </form>
     )

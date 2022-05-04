@@ -42,11 +42,11 @@ function App() {
                                 </Route>
                                 <Route path="/login">
                                     {user && <Redirect to="/" />}
-                                    {!user && <Login />}
+                                    {!user && <Login setPageTitle={setPageTitle} />}
                                 </Route>
                                 <Route path="/signup">
                                     {user && <Redirect to="/" />}
-                                    {!user && <Signup />}
+                                    {!user && <Signup setPageTitle={setPageTitle} />}
                                 </Route>
                             </Switch>
                         </div>

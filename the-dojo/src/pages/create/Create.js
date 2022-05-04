@@ -15,7 +15,8 @@ const styles = [
     { value: 'stickynote', label: 'Sticky Note' }
 ]
 
-export default function Create() {
+export default function Create({setPageTitle}) {
+    setPageTitle('Send a note')
     const history = useHistory()
     const { user } = useAuthContext()
     const { documents } = useCollection('users')
@@ -121,92 +122,89 @@ export default function Create() {
     // }
 
     return (
-        <>
-            <h1 className="page-title">Create a new note</h1>
-            <form onSubmit={handleSubmit}>
-                {/* <label>note name:</label>
-                <input
-                    required
-                    type="text"
-                    onChange={(e) => setName(e.target.value)}
-                    value={name}
-                /> */}
+        <form onSubmit={handleSubmit}>
+            {/* <label>note name:</label>
+            <input
+                required
+                type="text"
+                onChange={(e) => setName(e.target.value)}
+                value={name}
+            /> */}
 
-                <label>Style:</label>
-                <Select
-                    className='react-select-container'
-                    classNamePrefix="react-select"
-                    onChange={(option) => setStyle(option)}
-                    options={styles}
-                >
+            <label>Style:</label>
+            <Select
+                className='react-select-container'
+                classNamePrefix="react-select"
+                onChange={(option) => setStyle(option)}
+                options={styles}
+            >
 
-                </Select>
+            </Select>
 
-                <label>write your message</label>
-                <textarea
-                    required
-                    onChange={(e) => setMessage(e.target.value)}
-                    value={message}
-                ></textarea>
+            <label>write your message</label>
+            <textarea
+                required
+                onChange={(e) => setMessage(e.target.value)}
+                value={message}
+            ></textarea>
 
-                <label>Expiry date:</label>
-                <input
-                    required
-                    type="date"
-                    onChange={(e) => setExpiryDate(e.target.value)}
-                    value={expiryDate}
-                />
+            <label>Expiry date:</label>
+            <input
+                required
+                type="date"
+                onChange={(e) => setExpiryDate(e.target.value)}
+                value={expiryDate}
+            />
 
 
-                {/* <select
-                    onChange={(e) => setStyle(e.target.value)}
-                >
-                    {styles.map(style => {
-                        return <option key={style.value} value={style.value}>{style.label}</option>
-                    })}
-                </select> */}
+            {/* <select
+                onChange={(e) => setStyle(e.target.value)}
+            >
+                {styles.map(style => {
+                    return <option key={style.value} value={style.value}>{style.label}</option>
+                })}
+            </select> */}
 
-                <label>Send to:</label>
-                <Select
-                    className='react-select-container'
-                    classNamePrefix="react-select"
-                    onChange={(option) => setRecipients(option)}
-                    options={users}
-                    isMulti
-                />
+            <label>Send to:</label>
+            <Select
+                className='react-select-container'
+                classNamePrefix="react-select"
+                onChange={(option) => setRecipients(option)}
+                options={users}
+                isMulti
+            />
 
-                {style.value === 'postcard' && (
-                    <>
-                        <label htmlFor="noteImage">Note image</label>
-                        <input
-                            name="noteImage"
-                            id="noteImage"
-                            required
-                            type="file"
-                            onChange={handleFileChange}
-                        />
-                        {noteImageError && <Error message={noteImageError} />}
-                    </>
+            {style.value === 'postcard' && (
+                <>
+                    <label htmlFor="noteImage">Note image</label>
+                    <input
+                        name="noteImage"
+                        id="noteImage"
+                        required
+                        type="file"
+                        onChange={handleFileChange}
+                    />
+                    {noteImageError && <Error message={noteImageError} />}
+                </>
 
-                )
+            )
 
-                }
+            }
 
 
 
-                {/* <select
-                    multiple
-                    onChange={(e) => handleAssignUsers(e.target)}
-                >
-                    {documents && documents.map(user => {
-                        return <option key={user.id} value={user.id}>{user.displayName}</option>
-                    })}
-                </select> */}
+            {/* <select
+                multiple
+                onChange={(e) => handleAssignUsers(e.target)}
+            >
+                {documents && documents.map(user => {
+                    return <option key={user.id} value={user.id}>{user.displayName}</option>
+                })}
+            </select> */}
 
-                <button className="btn">Add note</button>
+            <button className="btn">Add note</button>
 
-                {formError && <Error message={formError} />}
-            </form>
-        </>
+            {formError && <Error message={formError} />}
+        </form>
     )
 }

@@ -8,7 +8,8 @@ import Error from '../../components/Error'
 
 import './Login.css'
 
-export default function Login() {
+export default function Login({setPageTitle}) {
+    setPageTitle('Welcome')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const { login, isPending, error } = useLogin()
