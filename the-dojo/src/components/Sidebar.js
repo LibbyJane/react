@@ -14,22 +14,22 @@ export default function Sidebar() {
     return (
         <aside className="sidebar">
             <div className="sb-content">
-                {user && <div className="sb-user">
+                {user && <div className="sb-user sb-border">
                     {user.photoURL && <Avatar src={user.photoURL} />}
                     <p>Hey {user.displayName}</p>
                 </div>}
-                <nav className="sb-links">
+                <nav className="sb-links sb-border">
                     <ul>
                         <li>
-                            <NavLink exact to="/">
+                            <NavLink to="/">
                                 <img src={DashboardIcon} alt="dashboard icon" />
                                 <span>Dashboard</span>
                             </NavLink>
                         </li>
                         <li>
                             <NavLink to="/create">
-                                <img src={AddIcon} alt="add project icon" />
-                                <span>New Project</span>
+                                <img src={AddIcon} alt="new note icon" />
+                                <span>Send a note</span>
                             </NavLink>
                         </li>
                     </ul>

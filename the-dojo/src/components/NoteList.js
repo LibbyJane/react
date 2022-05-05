@@ -31,8 +31,8 @@ export default function NoteList({ notes }) {
                 </li>
             }
             {notes.map(note => (
-                <li key={note.id} className="card" data-saved={note.saved}>
-                    <header className="card-header">
+                <li key={note.id} className={`note is-${note.style}`} data-saved={note.saved}>
+                    <header className="note-header">
                         <HeartToggle
                                 val={note.id}
                                 isSet={note.saved}
@@ -49,7 +49,7 @@ export default function NoteList({ notes }) {
                     </Link>
 
 
-                    <footer className="card-footer">
+                    <footer className="note-footer">
                         <Avatar src={note.createdBy.photoURL} name={note.createdBy.displayName} />
                         <p className='note-author'>from {note.createdBy.displayName}</p>
                     </footer>

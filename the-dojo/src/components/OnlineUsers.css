@@ -4,13 +4,14 @@
   padding: 30px;
   box-sizing: border-box;
   background: #fbfbfb;
-  color: var(--heading-color);
+  color: var(--heading);
 }*/
 
+.user-list {
+    padding: 0 var(--space)
+}
 
 .user-list h4 {
-    border-bottom: 1px solid #eee;
-
     font-size: 1.2em;
     margin-bottom: 40px;
     padding-bottom: 10px;

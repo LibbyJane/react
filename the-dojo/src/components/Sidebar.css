@@ -1,6 +1,5 @@
 .sidebar {
-    background: var(--theme-primary);
-    color: var(--white);
+    background: var(--off-white);
     min-height: 100vh;
     position: relative;
     width: 240px;
@@ -11,17 +10,30 @@
     width: inherit;
 }
 
+.sb-border {
+    border-bottom: var(--border) rgba(255,255,255,0.5);
+    margin-bottom: var(--space);
+}
+
 .sb-user {
-    border-bottom: var(--border) rgba(255,255,255,0.2);
-    font-weight: bold;
+    color: var(--text);
+    /* font-family: var(--font-hand); */
+    font-weight: 600;
     padding: var(--space-md) var(--space-md);
     text-align: center;
+}
+
+.sb-user p {
+    color: inherit;
+    font-size: 1.1rem;
+    font-family: inherit;
+    font-weight: inherit;
 }
 
 
 /* avatar in sidebar */
 .sb-user .avatar {
-    border: 3px solid var(--white);
+    border: 3px solid var(--biro);
     height: 70px;
     width: 70px;
     margin-bottom: var(--space-sm);
@@ -38,7 +50,7 @@
 
 .sb-links a {
     box-sizing: border-box;
-    color: var(--white);
+    color: var(--text);
     display: flex;
     padding: var(--space-sm);
     text-decoration: none;
@@ -46,16 +58,19 @@
 }
 
 .sb-links img {
-    filter: invert(100%);
+    filter: invert(20%);
     margin-right: var(--space-sm);
 }
 
 .sb-links a.active {
-    background: var(--bg-color);
+    /* background: var(--brick) url('./../assets/images/cork-bg.jpg') top center repeat; */
+    background: var(--grey-c);
     border-radius: var(--space-md) 0 0 var(--space-md);
-    color: var(--grey-5);
+    /* box-shadow: inset 1px 1px 20px var(--brick); */
+    /* color: var(--white); */
+    /* text-shadow: 0 0 10px var(--brick); */
 }
 
 .sb-links .active img {
-    filter: invert(40%);
+    filter: invert(30%);
 }

@@ -13,7 +13,9 @@ export default function Navbar() {
         <nav className="navbar">
             <ul>
                 <li className="logo">
-                    <img src={Logo} alt="dojo logo" />
+                    <Link to="/">
+                        <img src={Logo} alt="dojo logo" />
+                    </Link>
                     <h1>Welcome</h1>
                 </li>
 
@@ -26,8 +28,8 @@ export default function Navbar() {
 
                 {user && (
                     <li>
-                        {!isPending && <button className="btn" onClick={logout}>Logout</button>}
-                        {isPending && <button className="btn" disabled>Logout</button>}
+                        {!isPending && <button className="btn is-white" onClick={logout}>Logout</button>}
+                        {isPending && <button className="btn is-white" disabled>Logout</button>}
                     </li>
                 )}
             </ul>

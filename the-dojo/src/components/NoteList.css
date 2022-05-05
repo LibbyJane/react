@@ -3,23 +3,29 @@
         grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
         grid-gap: var(--space-md);
         justify-content: start;
+        align-items: start;
 }
 
-.list-notes .card {
+.list-notes .note {
     /* order: 1; */
     display: flex;
         flex-direction: column;
-
+    background: var(--white);
+    border-radius: var(--radius-lg);
+    box-shadow:  var(--box-shadow);
+    color: var(--heading);
+    margin: 0 auto 0 0 ;
+    padding: 0 var(--space) var(--space);
     overflow: hidden;
-    padding-top: 0;
-    margin-right: auto;
+    transition: all 0.3s ease;
+    position: relative;
 }
 
-/* .list-notes .card[data-saved="true"] {
+/* .list-notes .note[data-saved="true"] {
     order: 0;
 } */
 
-.list-notes .card-header {
+.note-header {
     background: transparent;
     display: flex;
         justify-content: flex-end;
@@ -27,19 +33,25 @@
     padding: 0;
 }
 
-.list-notes .card-footer  {
+
+.note img {
+    display: block;
+    max-width: 100%;
+}
+
+.note-footer  {
     display: flex;
         align-items: center;
     margin-top: auto;
 }
 
-.list-notes .card-footer .avatar {
+.note-footer .avatar {
     --size: 1.2rem;
     height: var(--size);
     width: var(--size);
 }
 
-.list-notes .card-footer p {
+.note-footer p {
     margin: 0;
     padding: 0;
 }

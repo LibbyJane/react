@@ -7,6 +7,7 @@
 }
 
 .list-filters label {
+    color: var(--text-alt);
     cursor: pointer;
     display: flex;
         align-items: center;

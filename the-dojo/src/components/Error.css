@@ -1,6 +1,6 @@
 .error {
-    /* background: var(--error-bg); */
-    color: var(--error);
+    /* background: var(--danger-bg); */
+    color: var(--danger);
     font-size: 0.9rem;
     line-height: 1.2;
     position: relative;
