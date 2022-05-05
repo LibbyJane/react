@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom'
 import { useAuthContext } from "./hooks/useAuthContext"
 
@@ -16,7 +15,6 @@ import './App.css'
 
 function App() {
     const { authIsReady, user } = useAuthContext()
-    const [pageTitle, setPageTitle] = useState('Home')
 
     return (
         <>
@@ -25,28 +23,28 @@ function App() {
                     <BrowserRouter>
                         <Sidebar />
                         <div className="container">
-                            <Navbar title={pageTitle} />
+                            <Navbar />
 
                             <Switch>
                                 <Route exact path="/">
-                                    {user && <Dashboard setPageTitle={setPageTitle} />}
+                                    {user && <Dashboard />}
                                     {!user && <Redirect to="/login" />}
                                 </Route>
                                 <Route path="/create">
-                                    {user && <Create setPageTitle={setPageTitle} />}
+                                    {user && <Create />}
                                     {!user && <Redirect to="/login" />}
                                 </Route>
                                 <Route path="/notes/:id">
-                                    {user && <Note setPageTitle={setPageTitle} />}
+                                    {user && <Note  />}
                                     {!user && <Redirect to="/login" />}
                                 </Route>
                                 <Route path="/login">
                                     {user && <Redirect to="/" />}
-                                    {!user && <Login setPageTitle={setPageTitle} />}
+                                    {!user && <Login />}
                                 </Route>
                                 <Route path="/signup">
                                     {user && <Redirect to="/" />}
-                                    {!user && <Signup setPageTitle={setPageTitle} />}
+                                    {!user && <Signup />}
                                 </Route>
                             </Switch>
                         </div>

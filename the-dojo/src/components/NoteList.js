@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useFirestore } from "../hooks/useFirestore"
 import Avatar from '../components/Avatar'
@@ -7,16 +6,18 @@ import HeartToggle from '../components/HeartToggle'
 import './NoteList.css'
 
 export default function NoteList({ notes }) {
-    const { updateDocument, response } = useFirestore('notes')
+    const { updateDocument } = useFirestore('notes')
 
     const toggleHeart = async (id) => {
-        let note = notes.find((n, index) => {
+        notes.find((n, index) => {
             if (n.id === id) {
                 const newVal = notes[index].saved ? !notes[index].saved : true
                 updateDocument(id, {
                     saved: newVal
                 })
                 return true; // stop searching
+            } else {
+                return false
             }
         });
     }
@@ -52,6 +53,7 @@ export default function NoteList({ notes }) {
                         <Avatar src={note.createdBy.photoURL} name={note.createdBy.displayName} />
                         <p className='note-author'>from {note.createdBy.displayName}</p>
                     </footer>
+
 
                     {/* <h4>{note.name}</h4>
                     <p>Due by {note.dueDate.toDate().toDateString()}</p>

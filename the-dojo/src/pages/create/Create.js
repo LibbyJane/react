@@ -15,8 +15,7 @@ const styles = [
     { value: 'stickynote', label: 'Sticky Note' }
 ]
 
-export default function Create({setPageTitle}) {
-    setPageTitle('Send a note')
+export default function Create() {
     const history = useHistory()
     const { user } = useAuthContext()
     const { documents } = useCollection('users')
@@ -30,7 +29,7 @@ export default function Create({setPageTitle}) {
     const [style, setStyle] = useState('')
     const [recipients, setRecipients] = useState([])
     const [formError, setFormError] = useState(null)
-    const { addNote, isPending, error } = useAddNote()
+    const { addNote, response } = useAddNote()
 
     // create user values for react-select
     useEffect(() => {
@@ -108,9 +107,9 @@ export default function Create({setPageTitle}) {
         await addNote(note, noteImage)
 
 
-        // if (!response.error) {
-        //     history.push('/')
-        // }
+        if (!response.error) {
+            history.push('/')
+        }
     }
 
     // // if using html select
