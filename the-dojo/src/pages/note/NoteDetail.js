@@ -1,20 +1,19 @@
-import { useHistory } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { useAuthContext } from "../../hooks/useAuthContext"
 import { useFirestore } from "../../hooks/useFirestore"
 
 import Avatar from "../../components/Avatar"
 
 export default function NoteDetail({ note, id }) {
-    console.log(note)
     const { deleteDocument } = useFirestore('notes')
     const { user } = useAuthContext()
-    const history = useHistory()
+    const navigate = useNavigate()
 
     const handleClick = () => {
         deleteDocument(id)
 
         //TODO: delete any note images also
-        history.push('/')
+        navigate('/')
       }
 
     return (

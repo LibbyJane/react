@@ -11,8 +11,7 @@ export default function OnlineUsers() {
     const { uid } = projectAuth.currentUser
 
     return (
-        <section className="user-list">
-            <h4>All Users</h4>
+        <aside className="user-list">
             {documents && (
                 <ul className="user-list-items">
                     {documents.map(user => {
@@ -32,6 +31,6 @@ export default function OnlineUsers() {
             {error && (
                 <Error message={error} />
             )}
-        </section>
+        </aside>
     )
 }

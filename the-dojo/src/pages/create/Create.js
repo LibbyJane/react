@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { useHistory } from 'react-router'
+import { useNavigate } from 'react-router-dom'
 import Select from 'react-select'
 
 import { useCollection } from '../../hooks/useCollection'
@@ -16,7 +16,7 @@ const styles = [
 ]
 
 export default function Create() {
-    const history = useHistory()
+    const navigate = useNavigate()
     const { user } = useAuthContext()
     const { documents } = useCollection('users')
     const [users, setUsers] = useState([])
@@ -107,9 +107,9 @@ export default function Create() {
         await addNote(note, noteImage)
 
 
-        if (!response.error) {
-            history.push('/')
-        }
+        // if (!response.error) {
+        //     navigate('/')
+        // }
     }
 
     // // if using html select
@@ -121,7 +121,7 @@ export default function Create() {
     // }
 
     return (
-        <form onSubmit={handleSubmit}>
+        <form className="card" onSubmit={handleSubmit}>
             {/* <label>note name:</label>
             <input
                 required
@@ -186,9 +186,7 @@ export default function Create() {
                     {noteImageError && <Error message={noteImageError} />}
                 </>
 
-            )
-
-            }
+            )}
 
 
 
@@ -201,7 +199,10 @@ export default function Create() {
                 })}
             </select> */}
 
-            <button className="btn">Add note</button>
+            <fieldset className='form-actions'>
+                <button type="reset" className="btn" onClick={() => navigate('/')}>Cancel</button>
+                <button type="submit" className="btn">Add note</button>
+            </fieldset>
 
             {formError && <Error message={formError} />}
         </form>

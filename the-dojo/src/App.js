@@ -1,4 +1,4 @@
-import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom'
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import { useAuthContext } from "./hooks/useAuthContext"
 
 import Dashboard from './pages/dashboard/Dashboard'
@@ -7,9 +7,10 @@ import Login from './pages/login/Login'
 import Signup from './pages/signup/Signup'
 import Note from './pages/note/Note'
 
+// import Sandbox from './pages/sandbox/Sandbox'
+
 import Navbar from './components/Navbar'
 import Sidebar from './components/Sidebar'
-// import OnlineUsers from './components/OnlineUsers'
 
 import './App.css'
 
@@ -25,33 +26,50 @@ function App() {
                         <div className="container">
                             <Navbar />
 
-                            <Switch>
-                                <Route exact path="/">
-                                    {user && <Dashboard />}
-                                    {!user && <Redirect to="/login" />}
-                                </Route>
-                                <Route path="/create">
-                                    {user && <Create />}
-                                    {!user && <Redirect to="/login" />}
-                                </Route>
-                                <Route path="/notes/:id">
-                                    {user && <Note  />}
-                                    {!user && <Redirect to="/login" />}
-                                </Route>
-                                <Route path="/login">
-                                    {user && <Redirect to="/" />}
-                                    {!user && <Login />}
-                                </Route>
-                                <Route path="/signup">
-                                    {user && <Redirect to="/" />}
-                                    {!user && <Signup />}
-                                </Route>
-                            </Switch>
-                        </div>
+                            <Routes>
+                                <Route
+                                    path="/"
+                                    element={user ?  <Dashboard /> : <Navigate to="/login" />}
+                                />
 
-                        {/* {user &&
-                            <OnlineUsers />
-                        } */}
+                                <Route
+                                    path="/create"
+                                    element={user ?  <Create /> : <Navigate to="/login" />}
+                                />
+
+                                <Route
+                                    path="/notes/:id"
+                                    element={user ?  <Note /> : <Navigate to="/login" />}
+                                />
+
+                                <Route
+                                    path="/login"
+                                    element={!user ?  <Login /> : <Navigate to="/" />}
+                                />
+
+                                <Route
+                                    path="/signup"
+                                    element={!user ?  <Signup /> : <Navigate to="/" />}
+                                />
+
+                                {/* Nested route test page - /sandbox and sandbox/offers -  */}
+                                {/* <Route
+                                    path="/sandbox/*"
+                                    element={<Sandbox />}
+                                /> */}
+
+                                {/*
+                                <Route
+                                    path="/test"
+                                    element={(
+                                        <>
+                                            <h1>Test Page</h1>
+                                            <p>Test page content.</p>
+                                        </>
+                                    )}
+                                /> */}
+                            </Routes>
+                        </div>
                     </BrowserRouter>
                 </main>
             )}
