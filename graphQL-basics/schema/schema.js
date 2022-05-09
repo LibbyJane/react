@@ -1,113 +1,100 @@
-const graphql = require('graphql');
+const gql = require('graphql');
 const axios = require('axios');
 
-const {
-    GraphQLObjectType,
-    GraphQLString,
-    GraphQLInt,
-    GraphQLSchema,
-    GraphQLList,
-    GraphQLNonNull
-} = graphql;
 
-const CompanyType = new GraphQLObjectType({
-    name: 'Company',
-    fields: () => ({
-        id: { type: GraphQLString },
-        name: { type: GraphQLString },
-        description: { type: GraphQLString },
-        users: {
-            type: new GraphQLList(UserType),
-            resolve(parentValue, args) {
-                return axios.get(`http://localhost:3000/companies/${parentValue.id}/users`)
-                    .then(res => res.data)
-            }
-        }
-    })
-});
+exports.typeDefs = gql`
+  type Query {
+    hello: String
+    products(filter: ProductsFilterInput): [Product!]!
+    product(id: ID!): Product
+    categories: [Category!]!
+    category(id: ID!): Category
+  }
 
-const UserType = new GraphQLObjectType({
-    name: 'User',
-    fields: () => ({
-        id: { type: GraphQLString },
-        firstName: { type: GraphQLString },
-        age: { type: GraphQLInt },
-        company: {
-            type: CompanyType,
-            resolve(parentValue, args) {
-                return axios.get(`http://localhost:3000/companies/${parentValue.companyId}`)
-                    .then(res => res.data);
-            }
-        }
-    })
-});
+  type Mutation {
+    addCategory(input: AddCategoryInput!): Category!
+    addProduct(input: AddProductInput!): Product!
+    addReview(input: AddReviewInput!): Review!
+    deleteCategory(id: ID!): Boolean!
+    deleteProduct(id: ID!): Boolean!
+    deleteReview(id: ID!): Boolean!
+    updateCategory(id: ID!, input: UpdateCategoryInput!): Category
+    updateProduct(id: ID!, input: UpdateProductInput!): Product
+    updateReview(id: ID!, input: UpdateReviewInput!): Review
+  }
 
-const mutation = new GraphQLObjectType({
-    name: 'Mutation',
-    fields: {
-        addUser: {
-            type: UserType,
-            args: {
-                firstName: { type: new GraphQLNonNull(GraphQLString) },
-                age: { type: new GraphQLNonNull(GraphQLInt) },
-                companyId: { type: GraphQLString }
-            },
-            resolve(parentValue, { firstName, age, companyId }) {
-                return axios.post('http://localhost:3000/users', { firstName, age, companyId })
-                    .then(res => res.data);
-            }
-        },
-        deleteUser: {
-            type: UserType,
-            args: {
-                id: { type: new GraphQLNonNull(GraphQLString) }
-            },
-            resolve(parentValue, { id }) {
-                return axios.delete(`http://localhost:3000/users/${id}`)
-                    .then(res => res.data);
-            }
-        },
-        editUser: {
-            type: UserType,
-            args: {
-                id: { type: new GraphQLNonNull(GraphQLString) },
-                firstName: { type: GraphQLString },
-                age: { type: GraphQLInt },
-                companyId: { type: GraphQLString }
-            },
-            resolve(parentValue, args) {
-                console.log(parentValue, args);
-                return axios.patch(`http://localhost:3000/users/${args.id}`, args)
-                    .then(res => res.data);
-            }
-        }
-    }
-});
+  type Product {
+    id: ID!
+    name: String!
+    description: String!
+    quantity: Int!
+    image: String!
+    price: Float!
+    onSale: Boolean!
+    category: Category
+    reviews: [Review!]!
+  }
 
+  type Category {
+    id: ID!
+    name: String!
+    products(filter: ProductsFilterInput): [Product!]!
+  }
 
-const RootQuery = new GraphQLObjectType({
-    name: 'RootQueryType',
-    fields: {
-        user: {
-            type: UserType,
-            args: { id: { type: GraphQLString } },
-            resolve(parentValue, args) {
-                return axios.get(`http://localhost:3000/users/${args.id}`)
-                    .then(resp => resp.data);
-            }
-        },
-        company: {
-            type: CompanyType,
-            args: { id: { type: GraphQLString } },
-            resolve(parentValue, args) {
-                return axios.get(`http://localhost:3000/companies/${args.id}`)
-                    .then(resp => resp.data);
-            }
-        }
-    }
-});
+  type Review {
+    id: ID!
+    date: String!
+    title: String!
+    comment: String!
+    rating: Int!
+  }
 
-module.exports = new GraphQLSchema({
-    query: RootQuery,
-    mutation
-})
+  input ProductsFilterInput {
+    onSale: Boolean
+    avgRating: Int
+  }
+
+  input AddCategoryInput {
+    name: String!
+  }
+
+  input UpdateCategoryInput {
+    name: String!
+  }
+
+  input AddProductInput {
+    name: String!
+    description: String!
+    quantity: Int!
+    image: String!
+    price: Float!
+    onSale: Boolean!
+    categoryId: String
+  }
+
+  input UpdateProductInput {
+    name: String!
+    description: String!
+    quantity: Int!
+    image: String!
+    price: Float!
+    onSale: Boolean!
+    categoryId: String
+  }
+
+  input AddReviewInput {
+    date: String!
+    title: String!
+    comment: String!
+    rating: Int!
+    productId: ID!
+  }
+
+  input UpdateReviewInput {
+    date: String!
+    title: String!
+    comment: String!
+    rating: Int!
+    productId: ID!
+  }
+`;

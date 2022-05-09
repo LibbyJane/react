@@ -7,6 +7,12 @@ const { graphqlHTTP } = require('express-graphql');
 const path = require("path");
 const schema = require('./schema/schema');
 
+const { typeDefs } = require("./schema");
+const { Query } = require("./resolvers/Query");
+const { Mutation } = require("./resolvers/Mutation");
+const { Category } = require("./resolvers/Category");
+const { Product } = require("./resolvers/Product");
+
 const app = express();
 
 let server;
@@ -31,7 +37,7 @@ const sslOptions = {
 };
 
 app.use('/graphql', graphqlHTTP({
-    schema,
+    typeDefs,Query,Mutation,Category,Product,
     graphiql: true,
     rejectUnauthorized: false
 }));
