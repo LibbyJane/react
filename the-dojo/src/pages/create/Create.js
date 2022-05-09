@@ -6,16 +6,32 @@ import { useCollection } from '../../hooks/useCollection'
 import { useAuthContext } from '../../hooks/useAuthContext'
 import { useAddNote } from '../../hooks/useAddNote'
 import { timestamp } from '../../firebase/config'
+
+import Note from '../../components/Note'
 import Error from '../../components/Error'
 
 import './Create.css'
 
-const styles = [
-    { value: 'postcard', label: 'Post Card' },
-    { value: 'stickynote', label: 'Sticky Note' }
-]
 
-export default function Create() {
+
+export default function Create({setPageTitle}) {
+    useEffect(() => {
+        setPageTitle('Send a note')
+    })
+
+    const styles = [
+        { value: 'postcard', label: 'Post Card' },
+        { value: 'stickynote', label: 'Sticky Note' }
+    ]
+
+    const colors = [
+        { value: 'var( --white)', label: 'White' },
+        { value: 'var( --note-yellow)', label: 'Yellow' },
+        { value: 'var( --note-pink)', label: 'Pink' },
+        { value: 'var( --note-blue)', label: 'Blue' },
+        { value: 'var( --note-green)', label: 'Green' }
+    ]
+
     const navigate = useNavigate()
     const { user } = useAuthContext()
     const { documents } = useCollection('users')
@@ -26,7 +42,8 @@ export default function Create() {
 
     const [expiryDate, setExpiryDate] = useState('')
     const [message, setMessage] = useState('')
-    const [style, setStyle] = useState('')
+    const [style, setStyle] = useState('stickynote')
+    const [color, setColor] = useState('var(--white)')
     const [recipients, setRecipients] = useState([])
     const [formError, setFormError] = useState(null)
     const { addNote, response } = useAddNote()
@@ -68,7 +85,12 @@ export default function Create() {
         }
 
         setNoteImageError(null)
+        console.log('note image', selected)
+        selected.URL = URL.createObjectURL(selected)
         setNoteImage(selected)
+
+
+        // addImage(`noteImages/temp/${noteImage.name}`, noteImage)
     }
 
     const handleSubmit = async (e) => {
@@ -101,15 +123,16 @@ export default function Create() {
             recipientsList,
             createdBy,
             expiryDate: timestamp.fromDate(new Date(expiryDate)),
-            style: style ? style.value : null
+            style: style.value,
+            color: color
         }
 
         await addNote(note, noteImage)
 
 
-        // if (!response.error) {
-        //     navigate('/')
-        // }
+        if (!response.error) {
+            navigate('/')
+        }
     }
 
     // // if using html select
@@ -121,90 +144,140 @@ export default function Create() {
     // }
 
     return (
-        <form className="card" onSubmit={handleSubmit}>
-            {/* <label>note name:</label>
-            <input
-                required
-                type="text"
-                onChange={(e) => setName(e.target.value)}
-                value={name}
-            /> */}
+        <div className='cols'>
+            <form className="card" onSubmit={handleSubmit}>
+                {/* <label>note name:</label>
+                <input
+                    required
+                    type="text"
+                    onChange={(e) => setName(e.target.value)}
+                    value={name}
+                /> */}
 
-            <label>Style:</label>
-            <Select
-                className='react-select-container'
-                classNamePrefix="react-select"
-                onChange={(option) => setStyle(option)}
-                options={styles}
-            >
+                <label>Style:</label>
+                <ul className='checkable-list'>
+                    {styles.map((s) => (
+                        <li key={s.value}>
+                            <label>
+                                <input
+                                    type="radio"
+                                    name="noteStyle"
+                                    value={s.value}
+                                    onChange={(e) => setStyle(e.target.value)}
+                                />
+                                {s.label}
+                            </label>
+                        </li>
+                    ))}
+                </ul>
 
-            </Select>
+                {/* <Select
+                    className='react-select-container'
+                    classNamePrefix="react-select"
+                    onChange={(option) => setStyle(option)}
+                    options={styles}
+                    value={style}
+                >
 
-            <label>write your message</label>
-            <textarea
-                required
-                onChange={(e) => setMessage(e.target.value)}
-                value={message}
-            ></textarea>
+                </Select> */}
 
-            <label>Expiry date:</label>
-            <input
-                required
-                type="date"
-                onChange={(e) => setExpiryDate(e.target.value)}
-                value={expiryDate}
-            />
+                <label>Color:</label>
+                <ul className='checkable-list'>
+                    {colors.map((c) => (
+                        <li key={c.value}>
+                            <label className='checkable has-swatch' data-swatch={`${c.value}`}>
+                                <input
+                                    type="radio"
+                                    name="noteStyle"
+                                    value={c.value}
+                                    onChange={(e) => setColor(e.target.value)}
+                                />
+                                <span className="swatch" style={{ backgroundColor: `${c.value}`, color: `${c.value}` }}></span>
+                                <span className='checkable-text'>{c.label}</span>
+                            </label>
+                        </li>
+                    ))}
+                </ul>
+{/*
+                <Select
+                    className='react-select-container'
+                    classNamePrefix="react-select"
+                    onChange={(option) => setColor(option)}
+                    options={colors}
+                >
 
+                </Select> */}
 
-            {/* <select
-                onChange={(e) => setStyle(e.target.value)}
-            >
-                {styles.map(style => {
-                    return <option key={style.value} value={style.value}>{style.label}</option>
-                })}
-            </select> */}
+                <label>Write your message:</label>
+                <textarea
+                    required
+                    onChange={(e) => setMessage(e.target.value)}
+                    value={message}
+                ></textarea>
 
-            <label>Send to:</label>
-            <Select
-                className='react-select-container'
-                classNamePrefix="react-select"
-                onChange={(option) => setRecipients(option)}
-                options={users}
-                isMulti
-            />
-
-            {style.value === 'postcard' && (
-                <>
-                    <label htmlFor="noteImage">Note image</label>
-                    <input
-                        name="noteImage"
-                        id="noteImage"
-                        required
-                        type="file"
-                        onChange={handleFileChange}
-                    />
-                    {noteImageError && <Error message={noteImageError} />}
-                </>
-
-            )}
+                <label>Expiry date:</label>
+                <input
+                    required
+                    type="date"
+                    onChange={(e) => setExpiryDate(e.target.value)}
+                    value={expiryDate}
+                />
 
 
+                {/* <select
+                    onChange={(e) => setStyle(e.target.value)}
+                >
+                    {styles.map(style => {
+                        return <option key={style.value} value={style.value}>{style.label}</option>
+                    })}
+                </select> */}
 
-            {/* <select
-                multiple
-                onChange={(e) => handleAssignUsers(e.target)}
-            >
-                {documents && documents.map(user => {
-                    return <option key={user.id} value={user.id}>{user.displayName}</option>
-                })}
-            </select> */}
+                <label>Send to:</label>
+                <Select
+                    className='react-select-container'
+                    classNamePrefix="react-select"
+                    onChange={(option) => setRecipients(option)}
+                    options={users}
+                    isMulti
+                />
 
-            <fieldset className='form-actions'>
-                <button type="reset" className="btn" onClick={() => navigate('/')}>Cancel</button>
-                <button type="submit" className="btn">Add note</button>
-            </fieldset>
+                {style === 'postcard' && (
+                    <>
+                        <label htmlFor="noteImage">Note image</label>
+                        <input
+                            name="noteImage"
+                            id="noteImage"
+                            required
+                            type="file"
+                            onChange={handleFileChange}
+                        />
+                        {noteImageError && <Error message={noteImageError} />}
+                    </>
 
-            {formError && <Error message={formError} />}
-        </form>
+                )}
+
+
+
+                {/* <select
+                    multiple
+                    onChange={(e) => handleAssignUsers(e.target)}
+                >
+                    {documents && documents.map(user => {
+                        return <option key={user.id} value={user.id}>{user.displayName}</option>
+                    })}
+                </select> */}
+
+                <fieldset className='form-actions'>
+                    <button type="reset" className="btn" onClick={() => navigate('/')}>Cancel</button>
+                    <button type="submit" className="btn">Add note</button>
+                </fieldset>
+
+                {formError && <Error message={formError} />}
+            </form>
+            <aside className='note-preview'>
+                <Note note={{ message, style, color, noteImage, "createdBy": user,}} />
+            </aside>
+        </div>
+
     )
 }

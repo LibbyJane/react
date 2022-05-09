@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom'
 import { useAuthContext } from "../../hooks/useAuthContext"
 import { useFirestore } from "../../hooks/useFirestore"
-
+import Note from '../../components/Note'
 import Avatar from "../../components/Avatar"
 
 export default function NoteDetail({ note, id }) {

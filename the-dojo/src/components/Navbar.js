@@ -1,11 +1,12 @@
 import { Link } from 'react-router-dom'
 import { useLogout } from '../hooks/useLogout'
 import { useAuthContext } from '../hooks/useAuthContext'
+import Button from './Button'
 
 import './Navbar.css'
 import Logo from '../assets/logo.svg'
 
-export default function Navbar() {
+export default function Navbar( {pageTitle}) {
     const { logout, isPending } = useLogout()
     const { user } = useAuthContext()
 
@@ -16,7 +17,7 @@ export default function Navbar() {
                     <Link to="/">
                         <img src={Logo} alt="dojo logo" />
                     </Link>
-                    <h1>Welcome</h1>
+                    <h1>{pageTitle}</h1>
                 </li>
 
                 {!user && (
@@ -28,8 +29,8 @@ export default function Navbar() {
 
                 {user && (
                     <li>
-                        {!isPending && <button className="btn is-white" onClick={logout}>Logout</button>}
-                        {isPending && <button className="btn is-white" disabled>Logout</button>}
+                        {!isPending && <Button version="white" onClick={logout}>Logout</Button>}
+                        {isPending && <Button version="white" disabled="true">Logout</Button>}
                     </li>
                 )}
             </ul>

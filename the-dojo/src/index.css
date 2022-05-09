@@ -41,6 +41,7 @@
     --white: #fff;
     --red: #AE2033;
     --pale-pink: #FFEBE8;
+    --pale-yellow: #FFEBE8;
     --brick: #793b1d;
     --cream: #FFE7D3;
     --biro: #2F4858;
@@ -59,12 +60,18 @@
     --success: #00CE72;
 
     --sidebar-space-h: var(var(--space-md));
+
+    --note-yellow: #ffe040;
+    --note-pink: #edafbc;
+    --note-blue: #b2cde8;
+    --note-green: #d1e6dd;
 }
 
 /* base styles */
 body {
     background: var(--brick) url('./assets/images/cork-bg.jpg') top left repeat;
-    background-attachment: fixed;
+    /* background-size: 10rem auto; */
+    /* background-attachment: fixed; */
     font-family: Poppins, sans-serif;
     font-size: 16px;
     margin: 0;
@@ -253,6 +260,62 @@ textarea {
     z-index: 10;
 }
 
+.checkable.has-swatch {
+    display: flex;
+    line-height: 1;
+    padding: var(--space-xs);
+    padding-left: calc(var(--space) + var(--space-xs));
+    position: relative;
+}
+
+.checkable .swatch{
+    border-radius: 50%;
+    display: inline-block;
+    height: var(--space);
+    min-width: var(--space);
+    max-width: var(--space);
+    margin: auto;
+    position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        z-index: 0;
+    transition: all var(--transition);
+}
+
+.checkable-text {
+    position: relative;
+    z-index: 1;
+}
+
+.checkable input:checked~.swatch{
+    border-radius: 0;
+
+
+min-width: 100%;
+min-height: 100%;
+}
+.checkable-list {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.checkable-list li {
+    margin: 0;
+    padding: 0;
+}
+
+.checkable-list label {
+    cursor: pointer;
+    margin: 0 var(--space) var(--space-sm) 0;
+}
+
+.checkable-list input {
+    margin-right: var(--space-xs);
+}
+
 .visually-hidden {
     border: 0;
     clip: rect(0 0 0 0);
@@ -265,7 +328,9 @@ textarea {
     white-space: nowrap;
 }
 
-
+.cols {
+    display: flex;
+}
 
 /* .error {
 background: var(--danger-bg);

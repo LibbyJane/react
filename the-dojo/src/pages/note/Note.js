@@ -8,11 +8,15 @@ import NoteComments from './NoteComments'
 
 import './Note.css'
 
-export default function Note() {
+export default function Note({setPageTitle}) {
     const { id } = useParams()
     const [isPending, setIsPending] = useState(false)
     const [error, setError] = useState(null)
     const [note, setNote] = useState(null)
+
+    useEffect(() => {
+        setPageTitle('')
+    })
 
     useEffect(() => {
         setIsPending(true)
@@ -30,14 +34,12 @@ export default function Note() {
 
     }, [id])
 
-    console.log('note', note)
-
     if (error) {
         return <p>{error}</p>
     }
 
     return (
-        <section className='note'>
+        <section className='note-detail'>
             {isPending && <Loading />}
             {!isPending && note &&
                 <>

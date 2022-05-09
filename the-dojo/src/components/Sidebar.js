@@ -13,29 +13,31 @@ export default function Sidebar() {
 
     return (
         <aside className="sidebar">
-            <div className="sb-content">
-                {user && <div className="sb-user sb-border">
-                    {user.photoURL && <Avatar src={user.photoURL} />}
-                    <p>Hey {user.displayName}</p>
-                </div>}
-                <nav className="sb-links sb-border">
-                    <ul>
-                        <li>
-                            <NavLink to="/">
-                                <img src={DashboardIcon} alt="dashboard icon" />
-                                <span>Dashboard</span>
-                            </NavLink>
-                        </li>
-                        <li>
-                            <NavLink to="/create">
-                                <img src={AddIcon} alt="new note icon" />
-                                <span>Send a note</span>
-                            </NavLink>
-                        </li>
-                    </ul>
-                </nav>
-                {user && <OnlineUsers /> }
-            </div>
+            {user && <>
+                <div className="sb-content">
+                    <div className="sb-user sb-border">
+                        {user.photoURL && <Avatar src={user.photoURL} />}
+                        <p>Hey {user.displayName}</p>
+                    </div>
+                    <nav className="sb-links sb-border">
+                        <ul>
+                            <li>
+                                <NavLink to="/">
+                                    <img src={DashboardIcon} alt="dashboard icon" />
+                                    <span>Corkboard</span>
+                                </NavLink>
+                            </li>
+                            <li>
+                                <NavLink to="/create">
+                                    <img src={AddIcon} alt="new note icon" />
+                                    <span>Send a note</span>
+                                </NavLink>
+                            </li>
+                        </ul>
+                    </nav>
+                    <OnlineUsers />
+                </div>
+            </>}
         </aside>
     )
 }

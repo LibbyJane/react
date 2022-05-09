@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 import { useAuthContext } from '../../hooks/useAuthContext'
 import { useCollection } from '../../hooks/useCollection'
@@ -6,9 +6,13 @@ import NoteList from '../../components/NoteList'
 import Error from "../../components/Error"
 import FilterList from "../../components/FilterList"
 
-import './Dashboard.css'
+import './Corkboard.css'
 
-export default function Dashboard() {
+export default function Corkboard({setPageTitle}) {
+    useEffect(() => {
+        setPageTitle('')
+    })
+
     const { user } = useAuthContext()
     const filters = ['all', 'saved', 'has image']
     const [filter, setFilter] = useState('all')
@@ -18,7 +22,9 @@ export default function Dashboard() {
         ['recipientsList', 'array-contains', {'id': user.uid}],
         ['createdAt', 'desc']
     )
-
+    // const { documents, error } = useCollection(
+    //     'notes',
+    // )
     const changeFilter = (newFilter) => {
         setFilter(newFilter)
     }

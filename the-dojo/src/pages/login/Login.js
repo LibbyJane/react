@@ -1,14 +1,19 @@
 // styles
 import './Login.css'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useLogin } from '../../hooks/useLogin'
 
+import Button from '../../components/Button'
 import Error from '../../components/Error'
 
 import './Login.css'
 
-export default function Login() {
+export default function Login({setPageTitle}) {
+    useEffect(() => {
+        setPageTitle('Log In')
+    })
+
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const { login, isPending, error } = useLogin()
@@ -40,8 +45,8 @@ export default function Login() {
                 value={password}
             />
 
-            {!isPending && <button type="submit">log in</button>}
-            {isPending && <button type="submit" disabled>loading</button>}
+            {!isPending && <Button type="submit">log in</Button>}
+            {isPending && <Button type="submit" isDisabled={true}>loading</Button>}
 
             {error && <Error message={error} />}
         </form>

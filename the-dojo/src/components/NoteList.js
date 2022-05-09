@@ -1,7 +1,6 @@
 import { Link } from 'react-router-dom'
 import { useFirestore } from "../hooks/useFirestore"
-import Avatar from '../components/Avatar'
-import HeartToggle from '../components/HeartToggle'
+import Note from './Note'
 
 import './NoteList.css'
 
@@ -31,43 +30,8 @@ export default function NoteList({ notes }) {
                 </li>
             }
             {notes.map(note => (
-                <li key={note.id} className={`note is-${note.style}`} data-saved={note.saved}>
-                    <header className="note-header">
-                        <HeartToggle
-                                val={note.id}
-                                isSet={note.saved}
-                                callback={toggleHeart}
-                        />
-                    </header>
-
-                    <Link to={`/notes/${note.id}`}>
-                        { note.noteImage  &&
-                            <img className='note-image' src={ note.noteImage.URL} alt={ note.noteImage.name}/>
-                        }
-
-                        <p className='note-message'>{note.message}</p>
-                    </Link>
-
-
-                    <footer className="note-footer">
-                        <Avatar src={note.createdBy.photoURL} name={note.createdBy.displayName} />
-                        <p className='note-author'>from {note.createdBy.displayName}</p>
-                    </footer>
-
-
-                    {/* <h4>{note.name}</h4>
-                    <p>Due by {note.dueDate.toDate().toDateString()}</p>
-                    <div className="assigned-to">
-                        <p><strong>Assigned to:</strong></p>
-                        <ul className="list-avatars">
-                            {note.assignedUsersList.map(user => (
-                                <li key={user.id}>
-                                    <Avatar src={user.photoURL} />
-                                </li>
-                            ))}
-                        </ul>
-                    </div> */}
-
+                <li key={note.id} >
+                    <Note note={note} toggleHeart={toggleHeart}  />
                 </li>
             ))}
         </ul>
