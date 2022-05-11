@@ -30,7 +30,7 @@ export default function NoteList({ notes }) {
                 </li>
             }
             {notes.map(note => (
-                <li key={note.id} >
+                <li key={note.id} className={note.style}>
                     <Note note={note} toggleHeart={toggleHeart}  />
                 </li>
             ))}

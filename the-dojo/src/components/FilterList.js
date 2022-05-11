@@ -1,4 +1,4 @@
-import './FilterList.css'
+import './FilterList.scss'
 
 export default function FilterList({filters, changeFilter}) {
     const handleClick = (newFilter) => {

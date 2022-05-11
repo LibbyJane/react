@@ -1,5 +1,5 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import ReactDOM from 'react-dom'; //glue between React and the DOM, needed to mount app with ReactDOM.render
 import { AuthContextProvider } from './context/AuthContext';
 import App from './App';
 

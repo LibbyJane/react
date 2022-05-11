@@ -1,4 +1,4 @@
-import styles from './Error.css'
+import styles from './Error.scss'
 
 export default function Error( {message} ) {
     return (
