@@ -15,6 +15,7 @@
     "react-router-dom": "^6.2.1",
     "react-scripts": "4.0.3",
     "react-select": "^5.3.1",
+    "react-tooltip": "^4.2.21",
     "remark-gfm": "^3.0.1",
     "web-vitals": "^1.1.2"
   },
@@ -45,5 +46,9 @@
   "devDependencies": {
     "cross-env": "^7.0.3",
     "sass": "^1.51.0"
+  },
+  "prettier": {
+    "tabWidth": 4,
+    "semicolons": false
   }
 }

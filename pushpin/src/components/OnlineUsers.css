@@ -8,7 +8,7 @@
 }*/
 
 .user-list {
-    padding: 0 var(--space)
+    padding: 0 var(--space);
 }
 
 .user-list h4 {
@@ -20,20 +20,20 @@
 
 .user-list-items {
     display: flex;
-        flex-direction: column;
+    flex-direction: column;
 }
 
 .user-list-item {
     display: flex;
-        justify-content: flex-end;
-        align-items: center;
-    filter: grayscale(1) brightness(0.8);
+    justify-content: flex-end;
+    align-items: center;
     order: 1;
 }
 
-.user-list-item[data-online="true"] {
-    filter: none;
-    order: 0;
+.user-list-item[data-online="false"] {
+    filter: grayscale(1) brightness(0.8);
+
+    order: 1;
 }
 
 .user-list .avatar {
@@ -46,7 +46,7 @@
     background: var(--success);
     border-radius: 50%;
     display: inline-block;
-        height: var(--space-sm);
-        width: var(--space-sm);
+    height: var(--space-sm);
+    width: var(--space-sm);
     margin-right: var(--space-sm);
 }

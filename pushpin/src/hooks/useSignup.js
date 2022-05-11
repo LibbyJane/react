@@ -31,10 +31,11 @@ export const useSignup = () => {
             await projectFirestore.collection('users').doc(res.user.uid).set({
                 online: true,
                 displayName,
+                email,
                 photoURL
             })
 
-            dispatch({type: 'LOGIN', payload: res.user})
+            dispatch({ type: 'LOGIN', payload: res.user })
 
             if (!isCancelled) {
                 setIsPending(false)

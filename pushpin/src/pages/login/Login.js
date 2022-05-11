@@ -1,7 +1,6 @@
-// styles
-import './Login.css'
-
 import { useState, useEffect } from 'react'
+
+import { useAppContext } from "../../hooks/useAppContext"
 import { useLogin } from '../../hooks/useLogin'
 
 import Button from '../../components/Button'
@@ -9,10 +8,12 @@ import Error from '../../components/Error'
 
 import './Login.css'
 
-export default function Login({setPageTitle}) {
+export default function Login() {
+    const { dispatchApp } = useAppContext()
+
     useEffect(() => {
-        setPageTitle('Log In')
-    })
+        dispatchApp({ type: 'SET_TITLE', payload: 'Log In' })
+    }, [])
 
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
@@ -34,6 +35,7 @@ export default function Login({setPageTitle}) {
                 type="email"
                 onChange={(e) => setEmail(e.target.value)}
                 value={email}
+                required
             />
 
             <label>
@@ -43,6 +45,7 @@ export default function Login({setPageTitle}) {
                 type="password"
                 onChange={(e) => setPassword(e.target.value)}
                 value={password}
+                required
             />
 
             {!isPending && <Button type="submit">log in</Button>}

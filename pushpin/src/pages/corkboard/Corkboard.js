@@ -8,18 +8,14 @@ import FilterList from "../../components/FilterList"
 
 import './Corkboard.css'
 
-export default function Corkboard({setPageTitle}) {
-    useEffect(() => {
-        setPageTitle('Welcome')
-    })
-
+export default function Corkboard() {
     const { user } = useAuthContext()
     const filters = ['all', 'saved', 'has image']
     const [filter, setFilter] = useState('all')
 
     const { documents, error } = useCollection(
         'notes',
-        ['recipientsList', 'array-contains', {'id': user.uid}],
+        ['recipientsList', 'array-contains', { 'id': user.uid }],
         ['createdAt', 'desc']
     )
     // const { documents, error } = useCollection(
@@ -29,7 +25,7 @@ export default function Corkboard({setPageTitle}) {
         setFilter(newFilter)
     }
 
-    const selectedNotes = documents ? documents.filter( document => {
+    const selectedNotes = documents ? documents.filter(document => {
         switch (filter) {
             case 'all':
                 return true

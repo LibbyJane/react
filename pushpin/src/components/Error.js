@@ -1,8 +1,8 @@
-import styles from './Error.scss'
+import './Error.scss'
 
-export default function Error( {message} ) {
+export default function Error({ message }) {
     return (
-        <p className={styles.error}>
+        <p className="error">
             {message}
         </p>
     )

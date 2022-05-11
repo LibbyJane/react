@@ -1,9 +1,12 @@
 .btn {
+    margin-bottom: var(--space);
+
     &.is-white {
         border-color: var(--white);
         color: var(--white);
 
-        &:hover, &:focus {
+        &:hover,
+        &:focus {
             background-color: var(--white);
             border-color: var(--white);
             color: var(--text);
@@ -14,7 +17,8 @@
         border: 0 none;
         color: currentColor;
 
-        &:hover, &:focus {
+        &:hover,
+        &:focus {
             background-color: transparent;
             border-color: transparent;
         }

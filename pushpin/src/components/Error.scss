@@ -5,22 +5,22 @@
     line-height: 1.2;
     position: relative;
     padding: 0 0 var(--space-sm);
-        padding-left: calc(var(--space)  + var(--space-sm));
+    padding-left: calc(var(--space) + var(--space-sm));
 
     &::before {
-        --size: calc(var(--space) - var(--border-width)  - var(--border-width));
+        --size: calc(var(--space) - var(--border-width) - var(--border-width));
 
         border: var(--border);
         border-radius: 50%;
-        content: '!';
+        content: "!";
+        font-size: 12px;
         height: var(--size);
         width: var(--size);
-        line-height: 1.2;
+        line-height: 1;
         font-weight: 600;
         position: absolute;
-            top: 0;
-            left: 0;
+        top: var(--space-xs);
+        left: 0;
         text-align: center;
     }
 }
-

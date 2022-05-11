@@ -5,32 +5,32 @@ import Select from 'react-select'
 import { useCollection } from '../../hooks/useCollection'
 import { useAuthContext } from '../../hooks/useAuthContext'
 import { useAddNote } from '../../hooks/useAddNote'
-import { timestamp } from '../../firebase/config'
+// import { timestamp } from '../../firebase/config'
 
 import Note from '../../components/Note'
 import Error from '../../components/Error'
+import Swatch from '../../components/forms/Swatch'
 
 import './Create.css'
 
 
-
-export default function Create({setPageTitle}) {
-    useEffect(() => {
-        setPageTitle('Send a note')
-    })
+export default function Create() {
+    // useEffect(() => {
+    //     setPageTitle('Send a note')
+    // })
 
     const styles = [
+        { value: 'stickynote', label: 'Sticky Note' },
         { value: 'polaroid', label: 'Polaroid' },
         { value: 'postcard', label: 'Post Card' },
-        { value: 'stickynote', label: 'Sticky Note' }
     ]
 
     const colors = [
-        { value: 'var( --white)', label: 'White' },
-        { value: 'var( --note-yellow)', label: 'Yellow' },
-        { value: 'var( --note-pink)', label: 'Pink' },
-        { value: 'var( --note-blue)', label: 'Blue' },
-        { value: 'var( --note-green)', label: 'Green' }
+        { value: 'var(--white)', label: 'White' },
+        { value: 'var(--note-yellow)', label: 'Yellow' },
+        { value: 'var(--note-pink)', label: 'Pink' },
+        { value: 'var(--note-blue)', label: 'Blue' },
+        { value: 'var(--note-green)', label: 'Green' }
     ]
 
     const navigate = useNavigate()
@@ -41,7 +41,7 @@ export default function Create({setPageTitle}) {
     const [noteImage, setNoteImage] = useState(null)
     const [noteImageError, setNoteImageError] = useState(null)
 
-    const [expiryDate, setExpiryDate] = useState('')
+    // const [expiryDate, setExpiryDate] = useState('')
     const [message, setMessage] = useState('')
     const [style, setStyle] = useState('stickynote')
     const [color, setColor] = useState('var(--white)')
@@ -49,7 +49,6 @@ export default function Create({setPageTitle}) {
     const [formError, setFormError] = useState(null)
     const { addNote, isPending, error } = useAddNote()
 
-    // create user values for react-select
     useEffect(() => {
         if (documents) {
             const usersList = documents.map(u => {
@@ -86,22 +85,18 @@ export default function Create({setPageTitle}) {
         }
 
         setNoteImageError(null)
-        console.log('note image', selected)
         selected.URL = URL.createObjectURL(selected)
         setNoteImage(selected)
-
-
-        // addImage(`noteImages/temp/${noteImage.name}`, noteImage)
     }
 
     const handleSubmit = async (e) => {
         e.preventDefault()
         setFormError(null)
 
-        if (!style) {
-            setFormError('Please select a note style.')
-            return
-        }
+        // if (!style) {
+        //     setFormError('Please select a note style.')
+        //     return
+        // }
         if (recipients.length < 1) {
             setFormError('Please assign the note to at least 1 user')
             return
@@ -123,7 +118,7 @@ export default function Create({setPageTitle}) {
             message,
             recipientsList,
             createdBy,
-            expiryDate: timestamp.fromDate(new Date(expiryDate)),
+            // expiryDate: timestamp.fromDate(new Date(expiryDate)),
             style: style,
             color: color
         }
@@ -145,14 +140,7 @@ export default function Create({setPageTitle}) {
 
     return (
         <div className='cols'>
-            <form className="card" onSubmit={handleSubmit}>
-                {/* <label>note name:</label>
-                <input
-                    required
-                    type="text"
-                    onChange={(e) => setName(e.target.value)}
-                    value={name}
-                /> */}
+            <form className="card form-create" onSubmit={handleSubmit}>
 
                 <label>Style:</label>
                 <ul className='checkable-list'>
@@ -163,6 +151,7 @@ export default function Create({setPageTitle}) {
                                     type="radio"
                                     name="noteStyle"
                                     value={s.value}
+                                    checked={s.value === style ? true : false}
                                     onChange={(e) => setStyle(e.target.value)}
                                 />
                                 {s.label}
@@ -170,76 +159,6 @@ export default function Create({setPageTitle}) {
                         </li>
                     ))}
                 </ul>
-
-                {/* <Select
-                    className='react-select-container'
-                    classNamePrefix="react-select"
-                    onChange={(option) => setStyle(option)}
-                    options={styles}
-                    value={style}
-                >
-
-                </Select> */}
-
-                <label>Color:</label>
-                <ul className='checkable-list'>
-                    {colors.map((c) => (
-                        <li key={c.value}>
-                            <label className='checkable has-swatch' data-swatch={`${c.value}`}>
-                                <input
-                                    type="radio"
-                                    name="noteStyle"
-                                    value={c.value}
-                                    onChange={(e) => setColor(e.target.value)}
-                                />
-                                <span className="swatch" style={{ backgroundColor: `${c.value}`, color: `${c.value}` }}></span>
-                                <span className='checkable-text'>{c.label}</span>
-                            </label>
-                        </li>
-                    ))}
-                </ul>
-{/*
-                <Select
-                    className='react-select-container'
-                    classNamePrefix="react-select"
-                    onChange={(option) => setColor(option)}
-                    options={colors}
-                >
-
-                </Select> */}
-
-                <label>Write your message:</label>
-                <textarea
-                    required
-                    onChange={(e) => setMessage(e.target.value)}
-                    value={message}
-                ></textarea>
-
-                <label>Expiry date:</label>
-                <input
-                    required
-                    type="date"
-                    onChange={(e) => setExpiryDate(e.target.value)}
-                    value={expiryDate}
-                />
-
-
-                {/* <select
-                    onChange={(e) => setStyle(e.target.value)}
-                >
-                    {styles.map(style => {
-                        return <option key={style.value} value={style.value}>{style.label}</option>
-                    })}
-                </select> */}
-
-                <label>Send to:</label>
-                <Select
-                    className='react-select-container'
-                    classNamePrefix="react-select"
-                    onChange={(option) => setRecipients(option)}
-                    options={users}
-                    isMulti
-                />
 
                 {style !== 'stickynote' && (
                     <>
@@ -256,6 +175,38 @@ export default function Create({setPageTitle}) {
 
                 )}
 
+                <label>Color:</label>
+                <ul className='checkable-list'>
+                    {colors.map((c) => (
+                        <li key={c.value}>
+                            <Swatch value={c.value} label={c.label} handler={setColor} />
+                        </li>
+                    ))}
+                </ul>
+
+                <label>Write your message:</label>
+                <textarea
+                    required
+                    onChange={(e) => setMessage(e.target.value)}
+                    value={message}
+                ></textarea>
+
+                {/* <label>Expiry date:</label>
+                <input
+                    required
+                    type="date"
+                    onChange={(e) => setExpiryDate(e.target.value)}
+                    value={expiryDate}
+                /> */}
+
+                <label>Send to:</label>
+                <Select
+                    className='react-select-container'
+                    classNamePrefix="react-select"
+                    onChange={(option) => setRecipients(option)}
+                    options={users}
+                    isMulti
+                />
 
                 {/* <select
                     multiple
@@ -274,7 +225,7 @@ export default function Create({setPageTitle}) {
                 {formError && <Error message={formError} />}
             </form>
             <aside className='note-preview'>
-                <Note note={{ message, style, color, noteImage, "createdBy": user,}} />
+                <Note note={{ message, style, color, noteImage, "createdBy": user, }} />
             </aside>
         </div>
 
