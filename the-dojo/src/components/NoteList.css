@@ -1,15 +1,24 @@
 .list-notes {
     display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        /* grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); */
+        grid-template-columns: repeat(6, 1fr);
+        /* grid-template-columns: repeat(auto-fill, minmax(180px, 260px)); */
+        grid-auto-flow: dense;
         grid-gap: var(--space-md);
         justify-content: start;
         align-items: start;
 }
 
-.list-notes li {
-    max-width: 400px;
+.list-notes .stickynote {
 }
 
+.list-notes .postcard {
+    grid-area: span 2 / span 3;
+}
+
+.list-notes .polaroid {
+    grid-area: span 2 / span 2;
+}
 
 .list-notes li:nth-child(2n) {
     transform: rotate(-0.5deg);
@@ -57,7 +66,7 @@
 }
 
 .list-notes li:nth-child(3n+6) .note-pin {
-    transform: translateY(-0.5rem);
+    transform: translateY(0.25rem);
     /* outline: 2px solid orange; */
 }
 

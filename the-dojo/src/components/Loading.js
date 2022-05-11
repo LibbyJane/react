@@ -1,5 +1,5 @@
 import icon from '../assets/icons/loader.svg'
-import './Loading.css'
+import './Loading.scss'
 
 export default function Loading() {
     return (

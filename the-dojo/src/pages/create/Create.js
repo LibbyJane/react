@@ -20,6 +20,7 @@ export default function Create({setPageTitle}) {
     })
 
     const styles = [
+        { value: 'polaroid', label: 'Polaroid' },
         { value: 'postcard', label: 'Post Card' },
         { value: 'stickynote', label: 'Sticky Note' }
     ]
@@ -46,7 +47,7 @@ export default function Create({setPageTitle}) {
     const [color, setColor] = useState('var(--white)')
     const [recipients, setRecipients] = useState([])
     const [formError, setFormError] = useState(null)
-    const { addNote, response } = useAddNote()
+    const { addNote, isPending, error } = useAddNote()
 
     // create user values for react-select
     useEffect(() => {
@@ -123,14 +124,13 @@ export default function Create({setPageTitle}) {
             recipientsList,
             createdBy,
             expiryDate: timestamp.fromDate(new Date(expiryDate)),
-            style: style.value,
+            style: style,
             color: color
         }
 
         await addNote(note, noteImage)
 
-
-        if (!response.error) {
+        if (!error) {
             navigate('/')
         }
     }
@@ -241,7 +241,7 @@ export default function Create({setPageTitle}) {
                     isMulti
                 />
 
-                {style === 'postcard' && (
+                {style != 'stickynote' && (
                     <>
                         <label htmlFor="noteImage">Note image</label>
                         <input

@@ -5,13 +5,14 @@ import { useAuthContext } from "./hooks/useAuthContext"
 import Corkboard from './pages/corkboard/Corkboard'
 import Create from './pages/create/Create'
 import Login from './pages/login/Login'
+import ProfilePage from './pages/profile/Profile'
 import Signup from './pages/signup/Signup'
 import Note from './pages/note/Note'
 
 // import Sandbox from './pages/sandbox/Sandbox'
 
-import Navbar from './components/Navbar'
-import Sidebar from './components/Sidebar'
+import SiteHeader from './components/layout/SiteHeader'
+// import Sidebar from './components/Sidebar'
 
 import './App.css'
 
@@ -24,9 +25,9 @@ function App() {
             {authIsReady && (
                 <main className="App">
                     <BrowserRouter>
-                        <Sidebar />
+                        {/* <Sidebar /> */}
                         <div className="container">
-                            <Navbar pageTitle={pageTitle}/>
+                            <SiteHeader pageTitle={pageTitle}/>
 
                             <Routes>
                                 <Route
@@ -42,6 +43,11 @@ function App() {
                                 <Route
                                     path="/notes/:id"
                                     element={user ?  <Note setPageTitle={setPageTitle} /> : <Navigate to="/login" setPageTitle={setPageTitle} />}
+                                />
+
+                                <Route
+                                    path="/profile"
+                                    element={user ?  <ProfilePage setPageTitle={setPageTitle} /> : <Navigate to="/login" setPageTitle={setPageTitle} />}
                                 />
 
                                 <Route

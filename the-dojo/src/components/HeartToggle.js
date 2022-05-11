@@ -1,7 +1,7 @@
 
 import HeartOutlineIcon from '../assets/icons/heart-outline.svg'
 import HeartIcon from '../assets/icons/heart.svg'
-import './HeartToggle.css'
+import './HeartToggle.scss'
 
 export default function HeartToggle({ val, isSet, callback }) {
 

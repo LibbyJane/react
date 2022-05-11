@@ -1,10 +1,11 @@
 import PropTypes from 'prop-types'
+import './Button.scss'
 
-function Button({ children, version, type, onClick, isDisabled }) {
+function Button({ children, variant, type, onClick, isDisabled }) {
     return (
         <button
             type={type}
-            className={`btn ${version ? 'is-' + version : ''}`}
+            className={`btn ${variant ? 'is-' + variant : ''}`}
             disabled={isDisabled}
             onClick={onClick}
         >
@@ -14,7 +15,7 @@ function Button({ children, version, type, onClick, isDisabled }) {
 }
 
 Button.defaultProps = {
-    version: 'primary',
+    variant: 'primary',
     type: 'button',
     isDisabled: false,
     onClick: null
@@ -22,7 +23,7 @@ Button.defaultProps = {
 
 Button.propTypes = {
     children: PropTypes.node.isRequired,
-    version: PropTypes.string,
+    variant: PropTypes.string,
     type: PropTypes.string,
     isDisabled: PropTypes.bool,
     onClick: PropTypes.func

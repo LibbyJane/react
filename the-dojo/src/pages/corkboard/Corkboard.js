@@ -10,7 +10,7 @@ import './Corkboard.css'
 
 export default function Corkboard({setPageTitle}) {
     useEffect(() => {
-        setPageTitle('')
+        setPageTitle('Welcome')
     })
 
     const { user } = useAuthContext()
