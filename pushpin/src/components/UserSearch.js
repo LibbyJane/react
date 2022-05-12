@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 
-import UserList from "./UserList"
+import UserSearchResults from "./UserSearchResults"
 
 
 export default function UserSearch({ }) {
@@ -22,7 +22,6 @@ export default function UserSearch({ }) {
 
 
 
-
     return (
         <div className=" ">
             <form className="form-user_search">
@@ -38,7 +37,7 @@ export default function UserSearch({ }) {
 
             {showResults && (
                 <>
-                    <UserList query={query} />
+                    <UserSearchResults query={query} />
                 </>
             )}
         </div>

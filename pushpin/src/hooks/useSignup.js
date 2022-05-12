@@ -32,7 +32,8 @@ export const useSignup = () => {
                 online: true,
                 displayName,
                 email,
-                photoURL
+                photoURL,
+                friends: []
             })
 
             dispatch({ type: 'LOGIN', payload: res.user })
