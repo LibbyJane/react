@@ -56,7 +56,7 @@ export default function Invitations() {
             )}
             {invitations && invitations.map((i) => (
                 <li key={i}>
-                    <Avatar src={i.photoURL} name={i.displayName} />
+                    <Avatar src={i.imageURL} name={i.displayName} />
                     {i.displayName}
 
                     <button type="button" onClick={() => handleAcceptInvitation(i.id)}>accept</button>

@@ -1,16 +1,15 @@
 import { useState, useEffect } from 'react'
-import { projectAuth } from '../../firebase/config'
 import { useCollection } from '../../hooks/useCollection'
 import { useDocument } from '../../hooks/useDocument'
-
 import { useFirestore } from "../../hooks/useFirestore"
+import { useAuthContext } from "../../hooks/useAuthContext"
 
 import Avatar from "../../components/Avatar"
 import Error from "../../components/Error"
 
 export default function UserSearchResults({ query }) {
-    const { uid } = projectAuth.currentUser
-
+    const { user } = useAuthContext()
+    const uid = user.id
     const { documents, error } = useCollection('users', query)
     const [id, setId] = useState(null)
     const { updateDocument } = useFirestore('invitations')
@@ -35,7 +34,7 @@ export default function UserSearchResults({ query }) {
                             return <li key={user.id} className="user-list-item">
                                 <button type="button" onClick={(e) => addFriend(user.id)}>
                                     <span className="ul-name">{user.displayName}</span>
-                                    <Avatar src={user.photoURL} name={user.photoURL} />
+                                    <Avatar src={user.imageURL} name={user.imageURL} />
                                 </button>
                             </li>
                         }
