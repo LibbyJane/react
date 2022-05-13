@@ -47,7 +47,7 @@ export default function Create() {
     const [color, setColor] = useState('var(--white)')
     const [recipients, setRecipients] = useState([])
     const [formError, setFormError] = useState(null)
-    const { addNote, isPending, error } = useAddNote()
+    const { addNote, error } = useAddNote()
 
     useEffect(() => {
         if (documents) {

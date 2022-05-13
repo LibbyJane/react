@@ -1,38 +1,30 @@
-import { projectAuth } from '../firebase/config'
-import { useCollection } from '../hooks/useCollection'
-import { useDocument } from '../hooks/useDocument'
+import { useState, useEffect } from 'react'
+import { projectAuth } from '../../firebase/config'
+import { useCollection } from '../../hooks/useCollection'
+import { useDocument } from '../../hooks/useDocument'
 
-import { useFirestore } from "../hooks/useFirestore"
+import { useFirestore } from "../../hooks/useFirestore"
 
-import Avatar from "./Avatar"
-import Error from "./Error"
+import Avatar from "../../components/Avatar"
+import Error from "../../components/Error"
 
 export default function UserSearchResults({ query }) {
-    console.log('auth', projectAuth.currentUser)
     const { uid } = projectAuth.currentUser
-    const { updateDocument, response } = useFirestore('users')
-    const { documents, error } = useCollection(
-        'users',
-        query
-    )
 
-    const { document } = useDocument(
-        'users',
-        uid
-    )
-
-    console.log('doc', document)
+    const { documents, error } = useCollection('users', query)
+    const [id, setId] = useState(null)
+    const { updateDocument } = useFirestore('invitations')
+    const { document } = useDocument('invitations', 'pending')
 
     const addFriend = async (id) => {
-
-
-        // user.friends = [...user.friends,  { id: 'pending' }]
-
-
-        await updateDocument(uid, {
-            friends: [...document.friends, { id: id, status: 'pending' }]
-        })
+        setId(id)
+        let updatedInvitations = {};
+        updatedInvitations[id] = document[id] ? document[id] : [];
+        updatedInvitations[id].push(uid)
+        await updateDocument('pending', updatedInvitations)
     }
+
+
 
     return (
         <aside className="user-list">

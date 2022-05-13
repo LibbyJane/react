@@ -1,9 +1,8 @@
 import { useState, useEffect } from 'react'
+import UserSearchResults from './UserSearchResults'
 
-import UserSearchResults from "./UserSearchResults"
 
-
-export default function UserSearch({ }) {
+export default function UserSearch() {
     const [searchTerm, setSearchTerm] = useState('')
     const [showResults, setShowResults] = useState(false)
     const [query, setQuery] = useState('')
@@ -37,6 +36,7 @@ export default function UserSearch({ }) {
 
             {showResults && (
                 <>
+                    <h2>Matched friend here</h2>
                     <UserSearchResults query={query} />
                 </>
             )}

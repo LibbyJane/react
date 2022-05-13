@@ -15,7 +15,7 @@ import CreateIcon from '../../assets/icons/mail-opened-filled.svg'
 import LogoutIcon from '../../assets/icons/log-out.svg'
 
 export default function SiteHeader() {
-    const { logout, isPending } = useLogout()
+    const { logout } = useLogout()
     const { user } = useAuthContext()
     const { headerTitle } = useAppContext()
 
